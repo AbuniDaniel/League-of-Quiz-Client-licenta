@@ -11,43 +11,11 @@ function Register() {
   const [password, setPassword] = useState("");
 
   const [loginStatus, setLoginStatus] = useState(false);
-  const register = () => {
-    
-    Axios.post("https://https://daniel-licenta-api.herokuapp.com/register", {
+  const register = async () => {
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/register", {
       username: usernameReg,
-      password: passwordReg,
-    }).then((response) => {
-      console.log(response);
-    });
-
+      password: passwordReg,})
   };
-
-  const login = () => {
-    Axios.post("https://https://daniel-licenta-api.herokuapp.com/login", {
-      username: username,
-      password: password,
-    }).then((response) => {
-      if (!response.data.auth) {
-        setLoginStatus(false);
-      } else {
-        localStorage.setItem("token", response.data.token)
-        setLoginStatus(true);
-      }
-    });
-  };
-
-  const userAuthenticated = () => {
-    Axios.get("https://https://daniel-licenta-api.herokuapp.com/isUserAuth", 
-      {headers: {
-        "x-access-token": localStorage.getItem("token"),
-    }}).then((response) => {
-      console.log(response);
-    })
-  }
-
-  const logout = () => {
-    localStorage.removeItem("token");
-  }
 
 
   

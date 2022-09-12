@@ -18,23 +18,26 @@ function App() {
   });
 
   useEffect(() => {
-    Axios
-      .get("https://https://daniel-licenta-api.herokuapp.com/isUserAuth", {
+
+    const fetchUserAuth = async () => {
+      const response = await Axios
+      .get("https://daniel-licenta-api.herokuapp.com/isUserAuth", {
         headers: {
 			"x-access-token": localStorage.getItem("token"),
         },
       })
-      .then((response) => {
-        if (response.data.error) {
-          setAuthState({ ...authState, status: false });
-        } else {
-          setAuthState({
-            username: response.data.username,
-            id: response.data.id,
-            status: true,
-          });
-        }
-      });
+      if (response.data.error) {
+        setAuthState({ ...authState, status: false });
+      } else {
+        setAuthState({
+          username: response.data.username,
+          id: response.data.id,
+          status: true,
+        });
+      }
+    }
+
+    fetchUserAuth();
   }, []);
 
   return (
