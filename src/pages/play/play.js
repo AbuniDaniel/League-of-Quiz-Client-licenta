@@ -20,7 +20,7 @@ function Play() {
   const [imagini] = useState([1,2,3,4]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/champion").then((response) => {
+    Axios.get("https://https://daniel-licenta-api.herokuapp.com/champion").then((response) => {
       setImgPath(response.data[0].img);
       setAnswer(response.data[0].answer);
     });

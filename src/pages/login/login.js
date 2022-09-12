@@ -16,7 +16,7 @@ function Login() {
 
   const login = (event) => {
     event.preventDefault();
-    Axios.post("http://localhost:3001/login", {
+    Axios.post("https://https://daniel-licenta-api.herokuapp.com/login", {
       username: username,
       password: password,
     }).then((response) => {
@@ -45,7 +45,7 @@ function Login() {
   };
 
   const userAuthenticated = () => {
-    Axios.get("http://localhost:3001/isUserAuth", 
+    Axios.get("https://https://daniel-licenta-api.herokuapp.com/isUserAuth", 
       {headers: {
         "x-access-token": localStorage.getItem("token"),
     }}).then((response) => {
