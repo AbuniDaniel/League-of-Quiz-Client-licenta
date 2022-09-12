@@ -20,13 +20,13 @@ function Play() {
   const [imagini] = useState([1,2,3,4]);
 
   useEffect(() => {
-    Axios.get("https://https://daniel-licenta-api.herokuapp.com/champion").then((response) => {
+    const fetchChampion = async () => {
+      const response = await Axios.get("https://https://daniel-licenta-api.herokuapp.com/champion")
       setImgPath(response.data[0].img);
       setAnswer(response.data[0].answer);
-    });
-
+    }
+    fetchChampion();
     hintButton();
-
   }, []);
 
   const checkAnswer = () => {
