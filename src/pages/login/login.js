@@ -23,8 +23,7 @@ function Login() {
       if (response.data.error) {
         notification["error"]({
           message: 'Login failed',
-          description:
-            response.data.error,
+          description: response.data.error,
         });
       } else {
         notification["success"]({

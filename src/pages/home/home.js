@@ -4,7 +4,7 @@ function Home() {
   return (
     <div>
       <Menu />
-        <p> yo, esti pe pagina home</p>
+        <p> yo, esti pe pagina homeee</p>
     </div>
     
   );
