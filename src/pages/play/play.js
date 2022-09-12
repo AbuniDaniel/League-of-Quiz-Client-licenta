@@ -21,12 +21,13 @@ function Play() {
 
   useEffect(() => {
     const fetchChampion = async () => {
-      const response = await Axios.get("https://https://daniel-licenta-api.herokuapp.com/champion")
+      const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/champion")
       setImgPath(response.data[0].img);
       setAnswer(response.data[0].answer);
     }
     fetchChampion();
     hintButton();
+
   }, []);
 
   const checkAnswer = () => {
