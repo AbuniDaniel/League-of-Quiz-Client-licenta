@@ -57,6 +57,7 @@ function Play() {
   return (
     <div className="wrapper">
       <Menu />
+      <div className="answers-list">
       <div className="answers">
         <button className="hint-button" onClick={hintButton}><img src={hint_button} alt="hint_button"/></button>
         <input id="filter"
@@ -82,7 +83,7 @@ function Play() {
         .map(f => <button onClick={() => {setFilter(f); setIsVisible(false)}} className="hatz" key={f}>{f} </button>)}
       </div>
       </ul>
-
+      </div>
 
       <div className="grid">
         <div className="gridimg" ><img className="img1" style={{visibility: isVisible1 ? 'visible' : 'hidden'}} src={imgpath} alt="loading champion"/></div>

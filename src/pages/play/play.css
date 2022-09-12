@@ -46,15 +46,6 @@
   margin-top: 15px;
   
 }
-.lista{
-  background-color: #181d30;
-  max-height: 200px;
-  width: 200px;
-  overflow-y: auto;
-  z-index: 1;
-  position: absolute;
-  border: 2px solid red;
-}
 
 input {
   display: block;
@@ -94,4 +85,21 @@ input {
   flex-direction: column;
   margin: 0 auto;
   height: auto;
+}
+
+.answers-list{
+  display: flex;
+  flex-direction: column;
+  max-height: 120px;
+}
+
+.lista{
+  background-color: #181d30;
+  max-height: 200px;
+  width: 200px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+  left: 50px;
+  bottom: 24px;
 }
