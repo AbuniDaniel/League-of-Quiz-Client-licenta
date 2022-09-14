@@ -10,7 +10,7 @@ body, html {
 
 .container{
   margin: 0;
-  top: 25%;
+  top: 20%;
   left: 50%;
   position: absolute;
   text-align: center;
@@ -21,7 +21,7 @@ body, html {
   border-bottom: 10px solid #8BD17C;
   width: 400px;
   height: 450px;
-  box-shadow: 1px 1px 100px 5px rgb(25,31,53);
+  box-shadow: 1px 1px 100px 5px rgb(40, 50, 92);
 }
 
 
@@ -34,23 +34,23 @@ body, html {
   margin-bottom: 70px;
 }
 
-.box input[type = "text"],.box input[type = "password"] {
+.email, .username, .password, .confirmPassword, .input-error {
   display: block;
   margin: 20px auto;
   background: #262e49;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 5px;
   padding: 14px 10px;
   width: 320px;
   outline: none;
   color: #d6d6d6;
-      -webkit-transition: all .2s ease-out;
-    -moz-transition: all .2s ease-out;
-    -ms-transition: all .2s ease-out;
-    -o-transition: all .2s ease-out;
-    transition: all .2s ease-out;
-  
+      -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
 }
+
 ::-webkit-input-placeholder {
   color: #565f79;
 }

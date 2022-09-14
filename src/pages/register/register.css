@@ -1,0 +1,52 @@
+.containerr{
+  margin: 0;
+  top: 20%;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  transform: translateX(-50%);
+  background-color: rgb( 33, 41, 66 );
+  border-radius: 9px;
+  border-top: 10px solid #79a6fe;
+  border-bottom: 10px solid #8BD17C;
+  width: 400px;
+  height: auto;
+  padding-bottom: 159px;
+  box-shadow: 1px 1px 100px 5px rgb(40, 50, 92);
+}
+
+.btn2 {
+  border:0;
+  background: #7f5feb;
+  color: #dfdeee;
+  border-radius: 100px;
+  width: 340px;
+  height: 49px;
+  font-size: 16px;
+  position: absolute;
+  top: 79.3%;
+  left: 8%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btn2:hover {
+  background: #5d33e6;
+}
+
+.dnthave2{
+  position: absolute;
+  top: 92%;
+  left: 69%;
+}
+
+
+input.input-error, select.input-error{
+  border: 1px solid red;
+}
+
+.error-message {
+  color: #fc8181;
+  font-size: 0.8rem;
+  position: relative;
+}

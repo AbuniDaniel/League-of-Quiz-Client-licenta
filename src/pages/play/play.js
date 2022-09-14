@@ -1,11 +1,18 @@
 import Menu from  "../../fragments/menu/menu";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import Axios from "axios";
 import "./play.css";
 import answer_button from "./answer-button.png"
 import hint_button from "./hint-button.png"
+import { authContext } from "../../helpers/authContext"
+import { Result } from 'antd';
+import "antd/lib/result/style/index.css";
+import { Link } from "react-router-dom";
 
 function Play() {
+
+  const { authState } = useContext(authContext);
+
   const fruit = ['apple', 'banana', 'orange', 'grapefruit',
   'mango', 'strawberry', 'peach', 'apricot'];
 
@@ -55,8 +62,11 @@ function Play() {
   };
 
   return (
-    <div className="wrapper">
-      <Menu />
+  <>
+  <Menu />
+  {authState.status?
+            <>
+                <div className="wrapper">
       <div className="answers-list">
       <div className="answers">
         <button className="hint-button" onClick={hintButton}><img src={hint_button} alt="hint_button"/></button>
@@ -92,7 +102,19 @@ function Play() {
         <div className="gridimg" ><img className="img4" style={{visibility: isVisible4 ? 'visible' : 'hidden'}} src={imgpath} alt="loading champion"/></div>
       </div>
     </div>
+            </>
+            :
+            <>  
+  <Result
+    status="403"
+    title={<p className="msg403">403</p>}
+    subTitle={<p className="msg403">Sorry, you are not authorized to access this page. (probably because you are not logged in)</p>}
+    extra={<><Link to="/login" className="btn403">Am deja cont</Link><p className="msg403">sau</p><Link to="/register" className="btn403">Creează un cont</Link></>}
+  />
+            </>
+    }
     
+  </>
   );
 
 }

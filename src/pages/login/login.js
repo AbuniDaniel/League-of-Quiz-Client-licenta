@@ -1,7 +1,7 @@
 import "./login.css";
 import { useState, useEffect, useContext } from "react";
 import Axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Menu from  "../../fragments/menu/menu"
 import { authContext } from "../../helpers/authContext"
 import { notification } from 'antd';
@@ -10,14 +10,14 @@ import "antd/lib/notification/style/index.css";
 function Login() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthState } = useContext(authContext);
 
   const login = (event) => {
     event.preventDefault();
     Axios.post("https://daniel-licenta-api.herokuapp.com/login", {
-      username: username,
+      email: email,
       password: password,
     }).then((response) => {
       if (response.data.error) {
@@ -35,6 +35,7 @@ function Login() {
         console.log(response.data.token);
         setAuthState({
           username: response.data.username,
+          email: response.data.email,
           id: response.data.id,
           status: true,
         })
@@ -44,19 +45,13 @@ function Login() {
   };
 
   const userAuthenticated = () => {
-    Axios.get("https://https://daniel-licenta-api.herokuapp.com/isUserAuth", 
+    Axios.get("https://daniel-licenta-api.herokuapp.com/isUserAuth", 
       {headers: {
         "x-access-token": localStorage.getItem("token"),
     }}).then((response) => {
       console.log(response);
     })
   }
-
-  const logout = () => {
-    localStorage.removeItem("token");
-  }
-
-  
   return (
     
     <>
@@ -66,19 +61,19 @@ function Login() {
     <form name="form1" className="box">
       
       <h5>AUTENTIFICARE</h5>
-        <input type="text" placeholder="Username" autoComplete="on"
+        <input type="text" placeholder="Email" autoComplete="on" className="email"
         onChange={(e) => {
-          setUsername(e.target.value);
+          setEmail(e.target.value);
         }}
         />
-        <input type="password" placeholder="Passsword" id="pwd" autoComplete="off"
+        <input type="password" placeholder="Passsword" autoComplete="off" className="password"
         onChange={(e) => {
           setPassword(e.target.value);
         }}
         />
         <button onClick={login} className="btn1">Login</button>
       </form>
-        <a href="#" className="dnthave">Creează un cont nou</a>
+        <Link to="/register" className="dnthave">Creează un cont nou</Link>
     </div> 
     </>
   );

@@ -10,7 +10,7 @@ const { authState, setAuthState } = useContext(authContext);
   
 const logout = () => {
     localStorage.removeItem("token");
-    setAuthState({ username: "", id: 0, status: false });
+    setAuthState({ username: "",email: "", id: 0, status: false });
   };
 
   return (

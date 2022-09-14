@@ -13,6 +13,7 @@ function App() {
 
   const [authState, setAuthState] = useState({
     username: "",
+    email: "",
     id: 0,
     status: false,
   });
@@ -32,6 +33,7 @@ function App() {
         console.log(response);
         setAuthState({
           username: response.data.username,
+          email: response.data.email,
           id: response.data.id,
           status: true,
         });
