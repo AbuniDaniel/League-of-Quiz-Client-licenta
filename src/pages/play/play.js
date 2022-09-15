@@ -9,10 +9,11 @@ import { Result } from 'antd';
 import "antd/lib/result/style/index.css";
 import { Link } from "react-router-dom";
 
+let champions;
+
 function Play() {
 
   const { authState } = useContext(authContext);
-
   const fruit = ['apple', 'banana', 'orange', 'grapefruit',
   'mango', 'strawberry', 'peach', 'apricot'];
 
@@ -32,12 +33,18 @@ function Play() {
       setImgPath(response.data[0].img);
       setAnswer(response.data[0].answer);
     }
+    const fetchOptions = async () => {
+      const response = await Axios.get("http://localhost:3001/champion-options")
+      champions = response.data;
+    }
+    fetchOptions();
     fetchChampion();
     hintButton();
-
+    
   }, []);
 
   const checkAnswer = () => {
+    console.log(champions);
     if(filter === answer)
       console.log("bv gion")
   };
@@ -56,8 +63,6 @@ function Play() {
 
     const index = imagini.indexOf(random);
     imagini.splice(index,1);
-
-    console.log(imagini)
       
   };
 
@@ -89,7 +94,7 @@ function Play() {
       style={{
         visibility: isVisible ? 'visible' : 'hidden'
       }} >
-      {fruit.filter(f => f.startsWith(filter) && filter !== '')
+      {champions?.filter(f => f.startsWith(filter) && filter !== '')
         .map(f => <button onClick={() => {setFilter(f); setIsVisible(false)}} className="hatz" key={f}>{f} </button>)}
       </div>
       </ul>
@@ -107,8 +112,7 @@ function Play() {
             <>  
   <Result
     status="403"
-    title={<p className="msg403">403</p>}
-    subTitle={<p className="msg403">Sorry, you are not authorized to access this page. (probably because you are not logged in)</p>}
+    subTitle={<p className="msg403">Sorry, you are not authorized to access this page without being logged in</p>}
     extra={<><Link to="/login" className="btn403">Am deja cont</Link><p className="msg403">sau</p><Link to="/register" className="btn403">Creează un cont</Link></>}
   />
             </>
