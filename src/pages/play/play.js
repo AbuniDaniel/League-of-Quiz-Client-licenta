@@ -34,7 +34,7 @@ function Play() {
       setAnswer(response.data[0].answer);
     }
     const fetchOptions = async () => {
-      const response = await Axios.get("http://localhost:3001/champion-options")
+      const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/champion-options")
       champions = response.data;
     }
     fetchOptions();
