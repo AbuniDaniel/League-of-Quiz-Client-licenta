@@ -8,6 +8,8 @@ import { authContext } from "../../helpers/authContext"
 import { Result } from 'antd';
 import "antd/lib/result/style/index.css";
 import { Link } from "react-router-dom";
+import { notification } from 'antd';
+import "antd/lib/notification/style/index.css";
 
 let champions;
 
@@ -25,30 +27,48 @@ function Play() {
   const [isVisible3, setIsVisible3] = useState(false);
   const [isVisible4, setIsVisible4] = useState(false);
   const [answer, setAnswer] = useState("");
-  const [imagini] = useState([1,2,3,4]);
+  const [imagini, setImagini] = useState([1,2,3,4]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
-    const fetchChampion = async () => {
+    startGame();
+  }, []);
+
+  const checkAnswer = async () => {
+    setIsButtonDisabled(true)
+    if(filter === answer){
+      console.log(filter, "  ", answer);
+      setFilter("");
+      notification["success"]({
+        message: "Correct answer",
+        description: "+1 ShopPoints added to your account",
+      });
+      startGame();
+      await Axios.put("https://daniel-licenta-api.herokuapp.com/correct-answer", {
+        id: authState.id,
+      })
+    }
+    else{setIsButtonDisabled(false);}
+  };
+
+  const startGame = async () => {
+      setIsButtonDisabled(false);
+      
       const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/champion")
       setImgPath(response.data[0].img);
       setAnswer(response.data[0].answer);
-    }
-    const fetchOptions = async () => {
-      const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/champion-options")
-      champions = response.data;
-    }
-    fetchOptions();
-    fetchChampion();
-    hintButton();
-    
-  }, []);
 
-  const checkAnswer = () => {
-    console.log(champions);
-    if(filter === answer)
-      console.log("bv gion")
+      setIsVisible1(false);
+      setIsVisible2(false);
+      setIsVisible3(false);
+      setIsVisible4(false);
+      setImagini([1,2,3,4]);
+      hintButton();
+
+      const response2 = await Axios.get("https://daniel-licenta-api.herokuapp.com/champion-options")
+      champions = response2.data;
+
   };
-
   const handleEnter = (event) => {
     if (event.key === 'Enter') 
         checkAnswer()
@@ -86,7 +106,7 @@ function Play() {
           onKeyDown={handleEnter}
         />
         
-        <button className="guess-button" onClick={checkAnswer}><img src={answer_button} alt="answer_button"/></button>
+        <button className="guess-button" onClick={checkAnswer} disabled={isButtonDisabled}><img src={answer_button} alt="answer_button"/></button>
       </div>
 
       <ul>
@@ -95,7 +115,7 @@ function Play() {
         visibility: isVisible ? 'visible' : 'hidden'
       }} >
       {champions?.filter(f => f.startsWith(filter) && filter !== '')
-        .map(f => <button onClick={() => {setFilter(f); setIsVisible(false)}} className="hatz" key={f}>{f} </button>)}
+        .map(f => <><button onClick={() => {setFilter(f); setIsVisible(false)}} className="hatz" key={f}>{f} </button></>)}
       </div>
       </ul>
       </div>
