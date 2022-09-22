@@ -19,7 +19,6 @@ function App() {
   });
 
   useEffect(() => {
-
     const fetchUserAuth = async () => {
       const response = await Axios
       .get("https://daniel-licenta-api.herokuapp.com/isUserAuth", {
