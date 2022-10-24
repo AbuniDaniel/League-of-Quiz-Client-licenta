@@ -12,7 +12,7 @@ import "antd/lib/notification/style/index.css";
 
 let champions;
 // "https://daniel-licenta-api.herokuapp.com"
-let url = "http://localhost:3001";
+let url = "https://daniel-licenta-api.herokuapp.com";
 
 function Easy44(prop) {
 
