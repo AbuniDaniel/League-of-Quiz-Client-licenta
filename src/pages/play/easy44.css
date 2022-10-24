@@ -1,0 +1,97 @@
+
+.gridimg44 {
+    width: 303.75px;
+    height: 179.25px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid rgb(6, 11, 75);
+  }
+  .img144 {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .img244 {
+    position: absolute;
+    top: 0;
+    left: -303.75px;
+  }
+  .img344 {
+    position: absolute;
+    top: 0;
+    left: -607.5px;
+  }
+  .img444 {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .img544 {
+    position: absolute;
+    bottom: -358.5px;
+  }
+  .img644 {
+    position: absolute;
+    left: -303.75px;
+    bottom: -358.5px;
+  }
+  .img744 {
+    position: absolute;
+    left: -607.5px;
+    bottom: -358.5px;
+  }
+  .img844 {
+    position: absolute;
+    left: -911.25px;
+    bottom: -358.5px;
+  }
+  .img944 {
+    position: absolute;
+    bottom: -179.25px;
+  }
+  .img1044 {
+    position: absolute;
+    left: -303.75px;
+    bottom: -179.25px;
+  }
+  .img1144 {
+    position: absolute;
+    left: -607.5px;
+    bottom: -179.25px;
+  }
+  .img1244 {
+    position: absolute;
+    left: -911.25px;
+    bottom: -179.25px;
+  }
+  .img1344 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  .img1444 {
+    position: absolute;
+    bottom: 0;
+    left: -303.75px;
+  }
+  .img1544 {
+    position: absolute;
+    bottom: 0;
+    left: -607.5px;
+  }
+  .img1644 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .grid44 {
+    display: grid;
+    grid-template-columns: 303.75px 1fr 1fr 1fr;
+    grid-template-rows: 179.25px 1fr 1fr 1fr;
+    grid-gap: 0px;
+    position: relative;
+    border: 5px solid rgb(81, 86, 150);
+    transform: scale(0.8,0.8);
+    bottom: 50px;
+    }

@@ -15,7 +15,7 @@ export const schema = yup.object().shape({
     .max(14)
     .matches(usernameRules, {
       message:
-        "da frt",
+        "Usernames can contain only letters (a-Z) and numbers (0-9)",
     }),
   password: yup
     .string()

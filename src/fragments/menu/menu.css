@@ -76,7 +76,7 @@
 	left: 370px;
 	background-color: #9b59b6;
 }
-.nav .start-register, .navLogged .start-register, .nav-link:nth-child(5):hover~.animation {
+.nav .start-register, .navLogged .start-register, .navLogged .start-myprofile, .nav-link:nth-child(5):hover~.animation {
 	width: 120px;
 	left: 530px;
 	background-color: #e67e22;

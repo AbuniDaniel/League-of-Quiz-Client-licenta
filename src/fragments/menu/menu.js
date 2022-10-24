@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useContext,} from "react"
 import "./menu.css"
 import { authContext } from "../../helpers/authContext"
+import { notification } from 'antd';
+import "antd/lib/notification/style/index.css";
 
 function Menu() {
 
@@ -12,6 +14,10 @@ const { authState, setAuthState } = useContext(authContext);
 const logout = () => {
     localStorage.removeItem("token");
     setAuthState({ username: "",email: "", id: 0, status: false });
+    notification["success"]({
+      message: "Logged out successfully",
+      description: "",
+    });
   };
 
 

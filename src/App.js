@@ -2,6 +2,7 @@ import Home from "./pages/home/home";
 import Play from "./pages/play/play";
 import Leaderboard from "./pages/leaderboard/leaderboard";
 import Login from "./pages/login/login";
+import Profile from "./pages/profile/profile";
 import Register from "./pages/register/register";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -51,6 +52,7 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/myprofile" element={<Profile />} />
         </Routes>
       </Router>
     </authContext.Provider>

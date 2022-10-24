@@ -1,6 +1,6 @@
 import "./register.css";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Axios from "axios";
 import Menu from  "../../fragments/menu/menu"
 import {useFormik} from "formik";
@@ -9,6 +9,7 @@ import { notification } from 'antd';
 import "antd/lib/notification/style/index.css";
 
 function Register() {
+  const navigate = useNavigate();
 
   const register = (values, actions) => {
     Axios.post("https://daniel-licenta-api.herokuapp.com/register", {
@@ -27,6 +28,7 @@ function Register() {
       description: "",
     });
       actions.resetForm();
+      navigate("/login");
     }
   });
   };

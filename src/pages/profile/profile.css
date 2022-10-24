@@ -1,0 +1,10 @@
+.profile{
+    border: 3px solid rgb(73, 81, 109);
+    border-radius: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+    width: 900px;
+    height: 800px;
+    margin-top: 3%;
+}

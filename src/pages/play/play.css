@@ -1,141 +1,30 @@
-
-.gridimg {
-    width: 607.5px;
-    height: 358.5px;
-    overflow: hidden;
-    position: relative;
-    border: 2px solid rgb(6, 11, 75);
-  }
-  .img1 {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .img2 {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-  .img3 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-  .img4 {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: 607.5px 1fr;
-    grid-template-rows: 358.5px 1fr;
-    grid-gap: 0px;
-    position: relative;
-    border: 5px solid #dfdfdf;
-    transform: scale(0.8,0.8);
-    bottom: 50px;
-    }
-
-.hatz{
-  cursor: pointer;
-  border: 1px solid white;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-  
+.select-play{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 800px;
+    margin: 7.5% auto 0 auto;
 }
 
-input {
-  display: block;
-  background: #212841;
-  border: 0;
-  border-radius: 5px;
-  padding: 14px 10px;
-  width: 200px;
-  height: 20px;
-  outline: none;
-  color: #d6d6d6;
+.select-play2
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 800px;
+    margin: 6% auto 0 auto;
 }
 
-
-.answers{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  height: 80px;
-  width: 380px;
-  margin-top: 3.5vh;
+.select-play .games .btn403{
+    display: flex;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
-.guess-button{
-  padding: 0;
-}
-
-.hint-button{
-  padding: 0;
-}
-
-.wrapper{
-  width: 60%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
-  height: auto;
-}
-
-.answers-list{
-  display: flex;
-  flex-direction: column;
-  max-height: 120px;
-}
-
-.lista{
-  background-color: #181d30;
-  max-height: 200px;
-  width: 200px;
-  overflow-y: auto;
-  position: relative;
-  z-index: 1;
-  left: 50px;
-  bottom: 33px;
-}
-
-.btn403 {
-  border:0;
-  background: #7f5feb;
-  color: #dfdeee;
-  border-radius: 100px;
-  padding: 13px 60px;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-.btn403:hover {
-  background: #5d33e6;
-  text-decoration: none;
-}
-
-.msg403{
-  color: #dfdeee;
-}
-
-.hint{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  top: 30px;
-}
-
-.hint-text{
-  border: 1px solid rgb(128, 135, 221);
-  color:rgb(68, 78, 209);
-  position: relative;
-  bottom: 13px;
-  padding: 2px 15px;
-  border-radius: 9px;
+.select-play2 .games .btn403{
+    display: flex;
+    margin: 0 auto;
+    margin-top: 20px;
 }
