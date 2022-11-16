@@ -16,25 +16,28 @@ function App() {
     username: "",
     email: "",
     id: 0,
+    pfp_src: "",
     status: false,
   });
 
   useEffect(() => {
+    console.log(authState.status);
     const fetchUserAuth = async () => {
       const response = await Axios
       .get("https://daniel-licenta-api.herokuapp.com/isUserAuth", {
         headers: {
 			"x-access-token": localStorage.getItem("token"),
         },
+        id: "hatz",
       })
       if (response.data.error) {
         setAuthState({ ...authState, status: false });
       } else {
-        console.log(response);
         setAuthState({
-          username: response.data.username,
-          email: response.data.email,
-          id: response.data.id,
+          username: response.data.user.username,
+          email: response.data.user.email,
+          id: response.data.user.id,
+          pfp_src: response.data.result[0].src,
           status: true,
         });
       }
@@ -44,8 +47,12 @@ function App() {
   }, []);
 
   return (
+    <>
+    
     <authContext.Provider value={{ authState, setAuthState }}>
+
       <Router>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/play" element={<Play />} />
@@ -56,6 +63,7 @@ function App() {
         </Routes>
       </Router>
     </authContext.Provider>
+    </>
   );
 }
 

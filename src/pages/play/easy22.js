@@ -10,6 +10,9 @@ import "antd/lib/result/style/index.css";
 import { Link } from "react-router-dom";
 import { notification } from 'antd';
 import "antd/lib/notification/style/index.css";
+import { useNavigate} from "react-router-dom";
+import FlipNumbers from 'react-flip-numbers';
+
 
 let champions;
 // "https://daniel-licenta-api.herokuapp.com"
@@ -17,6 +20,7 @@ let url = "https://daniel-licenta-api.herokuapp.com";
 
 
 function Easy22(prop) {
+  const navigate = useNavigate();
 
   const { authState } = useContext(authContext);
 
@@ -29,6 +33,7 @@ function Easy22(prop) {
   const [isVisible4, setIsVisible4] = useState(false);
   // const [imagini, setImagini] = useState([1,2,3,4]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isHintButtonDisabled, setIsHintButtonDisabled] = useState(false);
   const [hints, setHints] = useState(0);
   let imagine1, imagine2, imagine3, imagine4;
   let dificulty;
@@ -94,8 +99,12 @@ function Easy22(prop) {
       }
 
       setFilter("");
-      if(response.data.type === "success")
-      {
+      if(response.data.type === "success"){
+        setImgPath("");
+        setIsVisible1(false);
+      setIsVisible2(false);
+      setIsVisible3(false);
+      setIsVisible4(false);
         restartGame();
       } 
       }
@@ -122,10 +131,7 @@ function Easy22(prop) {
 
       setImgPath(response.data);
 
-      setIsVisible1(false);
-      setIsVisible2(false);
-      setIsVisible3(false);
-      setIsVisible4(false);
+      
       const response2 = await Axios.get(url+"/champion-options")
       champions = response2.data;
       hintFunc();
@@ -136,7 +142,7 @@ function Easy22(prop) {
     };
 
   const hintButton = async() => {
-    setIsButtonDisabled(true)
+    setIsHintButtonDisabled(true)
     imagine1 = document.querySelector(".img1").style.cssText[12];
     imagine2 = document.querySelector(".img2").style.cssText[12];
     imagine3 = document.querySelector(".img3").style.cssText[12];
@@ -162,7 +168,7 @@ function Easy22(prop) {
       description: response.data.description,
     });
     }
-    setIsButtonDisabled(false)
+    setIsHintButtonDisabled(false)
   };
 
   const hintFunc = () => {
@@ -223,8 +229,8 @@ function Easy22(prop) {
       <div className="answers-list">
       <div className="answers">
         <div className="hint">
-        <button className="hint-button" onClick={hintButton} disabled={isButtonDisabled}><img src={hint_button} alt="hint_button"/></button>
-        <p className="hint-text">{hints}</p>
+        <button className="hint-button" style={{filter: isHintButtonDisabled ? 'brightness(70%)' : ''}} onClick={hintButton} disabled={isHintButtonDisabled}><img src={hint_button} alt="hint_button"/></button>
+        <p className="hint-text"><FlipNumbers height={16} width={12} play={true} duration={1} perspective={70} numbers={`${hints}`} /></p>
         </div>
         <input id="filter"
           placeholder="Type champion name..."
@@ -237,7 +243,7 @@ function Easy22(prop) {
           onKeyDown={handleEnter}
         />
         
-        <button className="guess-button" onClick={checkAnswer} disabled={isButtonDisabled}><img src={answer_button} alt="answer_button"/></button>
+        <button className="guess-button" style={{filter: isButtonDisabled ? 'brightness(70%)' : ''}} onClick={checkAnswer} disabled={isButtonDisabled}><img src={answer_button} alt="answer_button"/></button>
       </div>
 
       <ul>
@@ -258,14 +264,11 @@ function Easy22(prop) {
         <div className="gridimg" ><img className="img4" style={{visibility: isVisible4 ? 'visible' : 'hidden'}} src={imgpath} alt="loading champion"/></div>
       </div>
     </div>
+
             </>
             :
             <>  
-  <Result
-    status="403"
-    subTitle={<p className="msg403">Sorry, you are not authorized to access this page without being logged in</p>}
-    extra={<><Link to="/login" className="btn403">Am deja cont</Link><p className="msg403">sau</p><Link to="/register" className="btn403">Creează un cont</Link></>}
-  />
+
             </>
     }
   </>

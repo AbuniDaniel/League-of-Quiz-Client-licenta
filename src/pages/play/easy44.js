@@ -9,6 +9,7 @@ import "antd/lib/result/style/index.css";
 import { Link } from "react-router-dom";
 import { notification } from 'antd';
 import "antd/lib/notification/style/index.css";
+import FlipNumbers from 'react-flip-numbers';
 
 let champions;
 // "https://daniel-licenta-api.herokuapp.com"
@@ -38,6 +39,7 @@ function Easy44(prop) {
   const [isVisible15, setIsVisible15] = useState(false);
   const [isVisible16, setIsVisible16] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isHintButtonDisabled, setIsHintButtonDisabled] = useState(false);
   const [hints, setHints] = useState(0);
   let imagine1, imagine2, imagine3, imagine4, imagine5, imagine6, imagine7, imagine8, imagine9, imagine10, imagine11, imagine12, imagine13, imagine14, imagine15, imagine16;
   let dificulty;
@@ -114,8 +116,27 @@ function Easy44(prop) {
       }
 
       setFilter("");
-      if(response.data.type === "success")
-          restartGame();
+      if(response.data.type === "success"){
+        setImgPath("");
+        setIsVisible1(false);
+      setIsVisible2(false);
+      setIsVisible3(false);
+      setIsVisible4(false);
+      setIsVisible5(false);
+      setIsVisible6(false);
+      setIsVisible7(false);
+      setIsVisible8(false);
+      setIsVisible9(false);
+      setIsVisible10(false);
+      setIsVisible11(false);
+      setIsVisible12(false);
+      setIsVisible13(false);
+      setIsVisible14(false);
+      setIsVisible15(false);
+      setIsVisible16(false);
+      restartGame();
+      }
+          
       }
       else{
         notification["warning"]({
@@ -140,23 +161,6 @@ function Easy44(prop) {
 
       setImgPath(response.data);
 
-      setIsVisible1(false);
-      setIsVisible2(false);
-      setIsVisible3(false);
-      setIsVisible4(false);
-      setIsVisible5(false);
-      setIsVisible6(false);
-      setIsVisible7(false);
-      setIsVisible8(false);
-      setIsVisible9(false);
-      setIsVisible10(false);
-      setIsVisible11(false);
-      setIsVisible12(false);
-      setIsVisible13(false);
-      setIsVisible14(false);
-      setIsVisible15(false);
-      setIsVisible16(false);
-
       const response2 = await Axios.get(url+"/champion-options")
       champions = response2.data;
       hintFunc();
@@ -167,7 +171,7 @@ function Easy44(prop) {
     };
 
   const hintButton = async() => {
-    setIsButtonDisabled(true)
+    setIsHintButtonDisabled(true)
     imagine1 = document.querySelector(".img144").style.cssText[12];
     imagine2 = document.querySelector(".img244").style.cssText[12];
     imagine3 = document.querySelector(".img344").style.cssText[12];
@@ -205,7 +209,7 @@ function Easy44(prop) {
       description: response.data.description,
     });
     }
-    setIsButtonDisabled(false)
+    setIsHintButtonDisabled(false)
   };
 
   const hintFunc = () => {
@@ -325,8 +329,8 @@ function Easy44(prop) {
       <div className="answers-list">
       <div className="answers">
         <div className="hint">
-        <button className="hint-button" onClick={hintButton} disabled={isButtonDisabled}><img src={hint_button} alt="hint_button"/></button>
-        <p className="hint-text">{hints}</p>
+        <button className="hint-button" style={{filter: isHintButtonDisabled ? 'brightness(70%)' : ''}} onClick={hintButton} disabled={isHintButtonDisabled}><img src={hint_button} alt="hint_button"/></button>
+        <p className="hint-text"><FlipNumbers height={16} width={12} play={true} duration={1} perspective={70} numbers={`${hints}`} /></p>
         </div>
         <input id="filter"
           placeholder="Type champion name..."
@@ -339,7 +343,7 @@ function Easy44(prop) {
           onKeyDown={handleEnter}
         />
         
-        <button className="guess-button" onClick={checkAnswer} disabled={isButtonDisabled}><img src={answer_button} alt="answer_button"/></button>
+        <button className="guess-button" style={{filter: isButtonDisabled ? 'brightness(70%)' : ''}} onClick={checkAnswer} disabled={isButtonDisabled}><img src={answer_button} alt="answer_button"/></button>
       </div>
 
       <ul>
@@ -375,11 +379,7 @@ function Easy44(prop) {
             </>
             :
             <>  
-  <Result
-    status="403"
-    subTitle={<p className="msg403">Sorry, you are not authorized to access this page without being logged in</p>}
-    extra={<><Link to="/login" className="btn403">Am deja cont</Link><p className="msg403">sau</p><Link to="/register" className="btn403">Creează un cont</Link></>}
-  />
+  
             </>
     }
     

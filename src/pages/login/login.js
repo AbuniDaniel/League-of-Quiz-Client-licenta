@@ -16,7 +16,7 @@ function Login() {
 
   const login = (event) => {
     event.preventDefault();
-    Axios.post("https://daniel-licenta-api.herokuapp.com/login", {
+    Axios.post("http://localhost:3001/login", {
       email: email,
       password: password,
     }).then((response) => {
@@ -28,15 +28,14 @@ function Login() {
       } else {
         notification["success"]({
           message: 'Logged in successfully',
-          description:
-            "",
+          description: "",
         });
         localStorage.setItem("token", response.data.token);
-        console.log(response.data.token);
         setAuthState({
           username: response.data.username,
           email: response.data.email,
           id: response.data.id,
+          pfp_src: response.data.pfp_src,
           status: true,
         })
         navigate("/play");
@@ -44,14 +43,6 @@ function Login() {
     });
   };
 
-  const userAuthenticated = () => {
-    Axios.get("https://daniel-licenta-api.herokuapp.com/isUserAuth", 
-      {headers: {
-        "x-access-token": localStorage.getItem("token"),
-    }}).then((response) => {
-      console.log(response);
-    })
-  }
   return (
     
     <>

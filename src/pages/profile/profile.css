@@ -4,7 +4,152 @@
     margin: 0 auto;
     margin-top: 20px;
     text-align: center;
-    width: 900px;
-    height: 800px;
+    width: 1300px;
+    height: 1400px;
     margin-top: 3%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+.chenar-profil{
+    background-color: #2e3044;
+    height: 550px;
+    width: 24%;
+    border-radius: 15px;
+    margin-top: 15px;
+    padding: 30px;
+}
+
+.chenar-stats{
+    background-color: #2e3044;
+    height: 540px;
+    width: 52%;
+    border-radius: 15px;
+    margin-top: 15px;
+    padding: 35px;
+}
+
+
+
+.img-profil {
+    display: flex;
+    margin:0 auto;
+}
+
+.chenar-wrapper{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.chenar-wrapper h2{
+    margin: 10px auto 10px auto;
+    color:rgb(29, 170, 206)
+}
+
+.changepfp {
+    background: #7f5feb;
+    color: #dfdeee;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 6px;
+    padding: 9px 35px;
+    font-size: 16px;
+    transition: 0.3s;
+    margin: 10px auto;
+  }
+  
+  .changepfp:hover {
+    background: #5d33e6;
+    cursor: pointer;
+  }
+
+.changePfpImg{
+    width: 200px;
+    margin: 10px;
+    border: 4px solid transparent;
+    transition: 0.3s;
+}
+
+.changePfpImg:hover{
+   
+    border-color:#4822d4;
+}
+
+.selected{
+    border-color:#d42222;
+}
+
+.pie-charts{
+    width: 260px;
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+.chenar-profil-stats{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.chenar-history{
+    display: flex;
+    margin: 0 auto;
+    height: 672px;
+}
+
+.table-row-wrong {
+    background-color: rgb(141, 71, 86);
+    color: #d0d5df;
+
+}
+
+.table-row-correct {
+    background-color: rgb(57, 87, 107);
+    color: #d0d5df;
+}
+
+.ant-table-thead .ant-table-cell{
+    background-color: #2e3044;
+    color: #d0d5df;
+}
+
+.table-row-correct .ant-table-cell-row-hover{
+    background: rgb(86, 110, 128) !important;
+}
+.table-row-wrong .ant-table-cell-row-hover{
+    background: rgb(146, 99, 109) !important;
+}
+
+.ant-pagination-item-active, .ant-pagination-item, .ant-pagination-item-link{
+    background-color: rgba(102, 104, 121, 0.856) !important;
+}
+
+.ant-pagination-options{
+    display: none !important;
+}
+
+.ant-pagination-item-ellipsis{
+    color: #5c7fda !important;
+}
+
+.ant-pagination-item a{
+    color: #d0d5df !important;
+}
+
+.date-created {
+    color: #d0d5df;
+    margin: 10px auto;
+}
+
+.error-message-change-username{
+    color: #f81a1a;
+  font-size: 0.85rem;
+
+  text-align: center;
 }

@@ -30,3 +30,15 @@ export const schema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
 });
+
+export const schemaChangeUsername = yup.object().shape({
+  username: yup
+    .string()
+    .required("Required")
+    .min(4)
+    .max(14)
+    .matches(usernameRules, {
+      message:
+        "Usernames can contain only letters (a-Z) and numbers (0-9)",
+    }),
+});

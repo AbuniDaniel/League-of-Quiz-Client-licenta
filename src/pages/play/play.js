@@ -7,6 +7,7 @@ import "./easy22.css";
 import "./play.css";
 import easy22poza from "./easy22.png"
 import easy44poza from "./easy44.png"
+import backButton from "./back-button.png"
 import { authContext } from "../../helpers/authContext"
 import { Result } from 'antd';
 import "antd/lib/result/style/index.css";
@@ -17,8 +18,19 @@ import "antd/lib/notification/style/index.css";
 function Play() {
 
   const { authState } = useContext(authContext);
-  const [selectGame, setSelectGame] = useState("");
+  const [selectGame, setSelectGame] = useState("play");
 
+  const [xeasy22, setXeasy22] = useState(false);
+  const [xeasy44, setXeasy44] = useState(false);
+  const [xhard22, setXhard22] = useState(false);
+  const [xhard44, setXhard44] = useState(false);
+
+  useEffect(() => {
+    selectGame === "easy22" ? setXeasy22(true) : setXeasy22(false);
+    selectGame === "easy44" ? setXeasy44(true) : setXeasy44(false);
+    selectGame === "hard22" ? setXhard22(true) : setXhard22(false);
+    selectGame === "hard44" ? setXhard44(true) : setXhard44(false);
+  }, [selectGame]);
   
 
   const easy22 = () => {
@@ -38,10 +50,10 @@ function Play() {
 
   return (
   <>
-  <Menu />
+  <Menu/>
   {authState.status?
   <>
-    {selectGame === "" &&
+    {selectGame === "play" &&
     <>
     <div className="select-play">
       <div className="games">
@@ -76,17 +88,29 @@ function Play() {
   />
             </>
     }
-    {selectGame === "easy22" &&
+    {xeasy22 &&
+    <>
+          <img className="backButton" onClick={()=> setSelectGame("play")} src={backButton}></img>
           <Easy22 selectGame = "easy22"/>
+    </>
     }
-    {selectGame === "hard22" &&
-          <Easy22 selectGame = "hard22"/>
-    }
-    {selectGame === "easy44" &&
+    {xeasy44 &&
+    <>
+    <img className="backButton" onClick={()=> setSelectGame("play")} src={backButton}></img>
           <Easy44 selectGame = "easy44"/>
+    </>
     }
-    {selectGame === "hard44" &&
+    {xhard22 &&
+    <>
+    <img className="backButton" onClick={()=> setSelectGame("play")} src={backButton}></img>
+          <Easy22 selectGame = "hard22"/>
+    </>
+    }
+    {xhard44 &&
+    <>
+    <img className="backButton" onClick={()=> setSelectGame("play")} src={backButton}></img>
           <Easy44 selectGame = "hard44"/>
+    </>
     }
   </>
   );

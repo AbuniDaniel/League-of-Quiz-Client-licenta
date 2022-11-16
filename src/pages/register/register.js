@@ -17,14 +17,14 @@ function Register() {
       password: values.password,
       email: values.email,
     }).then((response) => {
-    if (response.data.error) {
-      notification["error"]({
-        message: "Register failed",
-        description: response.data.error,
+    if (response.data.type === "error") {
+      notification[response.data.type]({
+        message: response.data.message,
+        description: response.data.description,
       });
     }else{
-    notification["success"]({
-      message: "Account successfully registered",
+    notification[response.data.type]({
+      message: response.data.message,
       description: "",
     });
       actions.resetForm();
