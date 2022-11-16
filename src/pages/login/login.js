@@ -16,7 +16,7 @@ function Login() {
 
   const login = (event) => {
     event.preventDefault();
-    Axios.post("http://localhost:3001/login", {
+    Axios.post("https://daniel-licenta-api.herokuapp.com/login", {
       email: email,
       password: password,
     }).then((response) => {
