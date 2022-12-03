@@ -60,13 +60,14 @@ body, html {
   
 }
 
-a{
+a, .forgot-pass{
   color: #5c7fda;
   text-decoration: none;
 }
 
-a:hover {
+a:hover, .forgot-pass:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .btn1 {
@@ -88,8 +89,25 @@ a:hover {
   background: #5d33e6;
 }
 
-.dnthave{
-    position: absolute;
-    top: 91%;
-    left: 60%;
+
+.forgot-new{
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  top:98px;
+}
+
+.forgot-pass{
+  padding: 0;
+}
+.forgot-new p {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+  margin:0;
+}
+
+.error-message-forgot{
+  color: #f81a1a;
+  font-size: 0.85rem;
+  text-align: center;
 }

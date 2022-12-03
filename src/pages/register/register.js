@@ -12,7 +12,7 @@ function Register() {
   const navigate = useNavigate();
 
   const register = (values, actions) => {
-    Axios.post("https://daniel-licenta-api.herokuapp.com/register", {
+    Axios.post("https://licenta-server-production.up.railway.app/register", {
       username: values.username,
       password: values.password,
       email: values.email,
@@ -51,7 +51,7 @@ function Register() {
     
     <form autoComplete="off" name="form1" className="box" onSubmit={handleSubmit}>
       
-      <h5 className="titlu">ÎNREGISTRARE</h5>
+      <h5 className="titlu">CREATE AN ACCOUNT</h5>
         <input type="text" placeholder="Email"
         id="email"
         value={values.email}
@@ -86,7 +86,7 @@ function Register() {
         {errors.confirmPassword && touched.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
         <button type="submit" className="btn2"> Register </button>
       </form>
-        <Link to="/login" className="dnthave2">Am deja cont</Link>
+        <Link to="/login" className="dnthave2">Already have an account?</Link>
     </div> 
     </>
   );

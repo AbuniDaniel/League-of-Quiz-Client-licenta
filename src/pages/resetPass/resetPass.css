@@ -1,0 +1,36 @@
+.container-reset-pass{
+    margin: 0;
+    top: 20%;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    transform: translateX(-50%);
+    background-color: rgb( 33, 41, 66 );
+    border-radius: 9px;
+    border-top: 10px solid #79a6fe;
+    border-bottom: 10px solid #8BD17C;
+    width: 400px;
+    height: auto;
+    padding-bottom: 159px;
+    box-shadow: 1px 1px 100px 5px rgb(40, 50, 92);
+  }
+
+  .spin-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 60vh;
+}
+
+.spin-container h2{
+    color: #ecf0f1;
+    position: relative;
+    bottom: 25px;
+    margin-bottom: 0;
+}
+
+.spin-container h3{
+    color: #ecf0f1;
+    margin: 0;
+}

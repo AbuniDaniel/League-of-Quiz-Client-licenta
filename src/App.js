@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { authContext } from "./helpers/authContext";
+import EmailVerify from "./pages/emailVerify/emailVerify";
+import ResetPass from "./pages/resetPass/resetPass";
 
 function App() {
 
@@ -21,14 +23,12 @@ function App() {
   });
 
   useEffect(() => {
-    console.log(authState.status);
     const fetchUserAuth = async () => {
       const response = await Axios
-      .get("https://daniel-licenta-api.herokuapp.com/isUserAuth", {
+      .get("https://licenta-server-production.up.railway.app/isUserAuth", {
         headers: {
 			"x-access-token": localStorage.getItem("token"),
         },
-        id: "hatz",
       })
       if (response.data.error) {
         setAuthState({ ...authState, status: false });
@@ -60,6 +60,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/myprofile" element={<Profile />} />
+          <Route path="/users/:id/verify-email" element={<EmailVerify/>} />
+          <Route path="/users/:id/reset-pass" element={<ResetPass/>} />
         </Routes>
       </Router>
     </authContext.Provider>

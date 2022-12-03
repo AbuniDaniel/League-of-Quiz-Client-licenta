@@ -37,6 +37,8 @@ let dataCreated3;
 function Profile() {
   const { authState, setAuthState } = useContext(authContext);
 
+  const [pageLoading, setPageLoading] = useState(true);
+
   const [easy22correct, setEasy22correct] = useState(0);
   const [easy22wrong, setEasy22wrong] = useState(0);
   const [hard22correct, setHard22correct] = useState(0);
@@ -114,15 +116,19 @@ function Profile() {
   ];
   
   useEffect(() => {
+
     myProfile();
     fetchPfps();
     fetchUserHistory();
+
   }, [authState]);
 
+  let profile, pfp, userHistory
   const myProfile = async () => {
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/myprofile", {
+    const response = await Axios.post("https://licenta-server-production.up.railway.app/myprofile", {
       id: authState.id,
     });
+    profile = response;
     let dataCreated = new Date(response.data[0].date)
     let dataCreated2 = new Date(dataCreated.setHours(dataCreated.getHours() + 2))
     dataCreated3 = dataCreated2.setSeconds(dataCreated2.getSeconds() - 104)
@@ -138,7 +144,9 @@ function Profile() {
   };
 
   const fetchPfps = async () => {
-    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/pfp-options");
+    const response = await Axios.get("https://licenta-server-production.up.railway.app/pfp-options");
+    pfp = response;
+    setPageLoading(false)
     setPfps(response.data);
   };
 
@@ -233,9 +241,10 @@ function Profile() {
   //gata legat de x minutes ago
 
   const fetchUserHistory = async () => {
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/user-history" ,{
+    const response = await Axios.post("https://licenta-server-production.up.railway.app/user-history" ,{
       id: authState.id,
     });
+    userHistory = response;
     if(authState.status)
     {
       data_history = [];
@@ -358,7 +367,7 @@ function Profile() {
   const handleOk = async () => {
     setConfirmLoading(true);
 
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-pfp", {
+    const response = await Axios.post("https://licenta-server-production.up.railway.app/change-pfp", {
       id: authState.id,
       pfp_name: pfpClicked,
     });
@@ -389,7 +398,7 @@ function Profile() {
 
   const changeUsername = async (values, actions) => {
     setConfirmLoadingUsername(true);
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-username", {
+    const response = await Axios.post("https://licenta-server-production.up.railway.app/change-username", {
         token: localStorage.getItem("token"),
         id: authState.id,
         username: values.username,
@@ -418,6 +427,7 @@ function Profile() {
   return (
     <>
       <Menu />
+      {pageLoading? <p>ma incararc bos</p>: <p>mam ancarcat</p>}
       <div className="profile">
         <div className="chenar-profil-stats">
         <div className="chenar-profil">

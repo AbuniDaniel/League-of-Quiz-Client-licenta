@@ -1,0 +1,19 @@
+.email-verify-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 60vh;
+}
+
+.email-verify-container h2{
+    color: #ecf0f1;
+    position: relative;
+    bottom: 25px;
+    margin-bottom: 0;
+}
+
+.email-verify-container h3{
+    color: #ecf0f1;
+    margin: 0;
+}
