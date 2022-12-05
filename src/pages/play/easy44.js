@@ -13,7 +13,7 @@ import FlipNumbers from 'react-flip-numbers';
 
 let champions;
 // "http://localhost:3001"
-let url = "http://localhost:3001";
+let url = "https://licenta-server-production.up.railway.app" ;
 
 function Easy44(prop) {
 
