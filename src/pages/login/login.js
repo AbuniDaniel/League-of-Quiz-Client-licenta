@@ -31,7 +31,7 @@ function Login() {
 
   const forgotPass = async (values, actions) => {
     setConfirmLoadingForgot(true);
-    const response = await Axios.post("http://localhost:3001/forgot-password", {
+    const response = await Axios.post("https://licenta-server-production.up.railway.app/forgot-password", {
         email: values.email,
         
     });
@@ -63,7 +63,7 @@ function Login() {
 
   const login = (event) => {
     event.preventDefault();
-    Axios.post("http://localhost:3001/login", {
+    Axios.post("https://licenta-server-production.up.railway.app/login", {
       email: email,
       password: password,
     }).then((response) => {
