@@ -1,0 +1,36 @@
+/* .da{
+    background: rgb(85,80,177);
+    background: linear-gradient(90deg, rgba(85,80,177,1) 0%, rgba(133,18,181,0.5242471988795518) 50%, rgba(6,180,215,1) 100%);
+} */
+
+.gradient1{
+    color:#cfd4df;
+    font-size: 1rem;
+	background: linear-gradient(-45deg, #ee9052, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 200% 200%;
+	animation: gradient1 6s ease infinite;
+	cursor: pointer;
+}
+
+.color1{
+    color:#cfd4df;
+    font-size: 1rem;
+	background-color: #3498db;
+	cursor: pointer;
+}
+
+.color1 .ant-table-cell-row-hover{
+	background-color: #66addb !important;
+}
+
+@keyframes gradient1 {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

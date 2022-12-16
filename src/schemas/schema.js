@@ -64,3 +64,26 @@ export const schemaReset = yup.object().shape({
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
 });
+
+export const schemaChangePassword = yup.object().shape({
+  currentPassword: yup
+    .string()
+    .min(6)
+    .matches(passwordRules, {
+      message:
+        "Password must contain at least 1 uppercase character and 1 number",
+    })
+    .required("Required"),
+  newPassword: yup
+    .string()
+    .min(6)
+    .matches(passwordRules, {
+      message:
+        "Password must contain at least 1 uppercase character and 1 number",
+    })
+    .required("Required"),
+  confirmNewPassword: yup
+    .string()
+    .oneOf([yup.ref("newPassword"), null], "Passwords must match")
+    .required("Required"),
+});

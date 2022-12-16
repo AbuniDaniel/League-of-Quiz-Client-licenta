@@ -12,7 +12,7 @@ function Register() {
   const navigate = useNavigate();
 
   const register = (values, actions) => {
-    Axios.post("https://licenta-server-production.up.railway.app/register", {
+    Axios.post("https://daniel-licenta-api.herokuapp.com/register", {
       username: values.username,
       password: values.password,
       email: values.email,

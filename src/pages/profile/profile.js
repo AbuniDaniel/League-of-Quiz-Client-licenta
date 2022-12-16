@@ -1,10 +1,19 @@
 import Menu from "../../fragments/menu/menu";
 import "./profile.css";
+import unranked from "./ranks/unranked.webp"
+import bronze from "./ranks/bronze.webp"
+import silver from "./ranks/silver.webp"
+import gold from "./ranks/gold.webp"
+import platinum from "./ranks/platinum.webp"
+import diamond from "./ranks/diamond.webp"
+import master from "./ranks/master.webp"
+import challenger from "./ranks/challenger.webp"
+import question_mark from "../play/hint-button.png"
 import Axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { authContext } from "../../helpers/authContext";
 import {useFormik} from "formik";
-import {schemaChangeUsername} from "../../schemas/schema"
+import {schemaChangeUsername, schemaChangePassword} from "../../schemas/schema"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,6 +32,11 @@ import { Switch, Table } from 'antd';
 import "antd/lib/table/style/index.css";
 import "antd/lib/pagination/style/index.css";
 import "antd/lib/select/style/index.css";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+import "antd/lib/spin/style/index.css";
+import { Progress } from 'antd';
+import "antd/lib/progress/style/index.css";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -31,6 +45,7 @@ ChartJS.register(
   Legend,
   ArcElement
 );
+
 let data_history = [];
 let dataCreated3;
 
@@ -48,7 +63,9 @@ function Profile() {
   const [hard44correct, setHard44correct] = useState(0);
   const [hard44wrong, setHard44wrong] = useState(0);
   const [userEmail, setUserEmail] = useState();
-
+  const [rank, setRank] = useState("");
+  const [rankPoints, setRankPoints] = useState(0);
+  const [percentage, setPercentage] = useState(0);
   const [pfps, setPfps] = useState([]);
 
   const [pfpClicked, setPfpClicked] = useState("");
@@ -59,7 +76,21 @@ function Profile() {
   const [openUsername, setOpenUsername] = useState(false);
   const [confirmLoadingUsername, setConfirmLoadingUsername] = useState(false);
 
+  const [openPassword, setOpenPassword] = useState(false);
+  const [confirmLoadingPassword, setConfirmLoadingPassword] = useState(false);
+
   const [loadingTable, setLoadingTable] = useState(true);
+
+  const[statisticsLocked, setStatisticsLocked] = useState(false);
+
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 30,
+      }}
+      spin
+    />
+  );
 
   const columns = [
     {
@@ -125,13 +156,13 @@ function Profile() {
 
   let profile, pfp, userHistory
   const myProfile = async () => {
-    const response = await Axios.post("https://licenta-server-production.up.railway.app/myprofile", {
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/myprofile", {
       id: authState.id,
     });
     profile = response;
     let dataCreated = new Date(response.data[0].date)
     let dataCreated2 = new Date(dataCreated.setHours(dataCreated.getHours() + 2))
-    dataCreated3 = dataCreated2.setSeconds(dataCreated2.getSeconds() - 104)
+    dataCreated3 = dataCreated2.setSeconds(dataCreated2.getSeconds() - 3)
     setUserEmail(response.data[0].email)
     setEasy22correct(response.data[0].easy22correct);
     setEasy22wrong(response.data[0].easy22wrong);
@@ -141,10 +172,54 @@ function Profile() {
     setEasy44wrong(response.data[0].easy44wrong);
     setHard44correct(response.data[0].hard44correct);
     setHard44wrong(response.data[0].hard44wrong);
+    
+    if((response.data[0].easy22correct == 0 && response.data[0].easy22wrong == 0) || (response.data[0].hard22correct == 0 && response.data[0].hard22wrong == 0) || (response.data[0].easy44correct == 0 && response.data[0].easy44wrong == 0) || (response.data[0].hard44correct == 0 && response.data[0].hard44wrong == 0))
+      setStatisticsLocked(true)
+
+    let rankpoints = response.data[0].rank_points;
+    setRankPoints(rankpoints);
+    if(rankpoints == 0)
+      setRank(unranked)
+    if(rankpoints > 0 && rankpoints < 53){
+      setPercentage(((rankpoints/53)*100).toFixed(2))
+      setRank(bronze)
+    }
+      
+    else if(rankpoints >= 53 && rankpoints < 141){
+      setPercentage((100 * (rankpoints - 53)/(141 - 53)).toFixed(2))
+      setRank(silver)
+    }
+      
+    else if(rankpoints >= 141 && rankpoints < 317){
+      setPercentage((100 * (rankpoints - 141)/(317 - 141)).toFixed(2))
+      setRank(gold)
+    }
+      
+    else if(rankpoints >= 317 && rankpoints < 601){
+      setPercentage((100 * (rankpoints - 317)/(601 - 317)).toFixed(2))
+      setRank(platinum)
+    }
+      
+    else if(rankpoints >= 601 && rankpoints < 1061){
+      setPercentage((100 * (rankpoints - 601)/(1061 - 601)).toFixed(2))
+      setRank(diamond)
+    }
+      
+    else if(rankpoints >= 1061 && rankpoints < 1771){
+      setPercentage((100 * (rankpoints - 1061)/(1771 - 1061)).toFixed(2))
+      console.log((100 * (rankpoints - 1061)/(1771 - 1061)))
+      setRank(master)
+    }
+      
+    else if(rankpoints == 1771){
+      setPercentage(100)
+      setRank(challenger)
+    }
+      
   };
 
   const fetchPfps = async () => {
-    const response = await Axios.get("https://licenta-server-production.up.railway.app/pfp-options");
+    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/pfp-options");
     pfp = response;
     setPageLoading(false)
     setPfps(response.data);
@@ -241,10 +316,11 @@ function Profile() {
   //gata legat de x minutes ago
 
   const fetchUserHistory = async () => {
-    const response = await Axios.post("https://licenta-server-production.up.railway.app/user-history" ,{
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/user-history" ,{
       id: authState.id,
     });
     userHistory = response;
+    console.log(response);
     if(authState.status)
     {
       data_history = [];
@@ -301,7 +377,7 @@ function Profile() {
           correct_wrong: checkCorrectWrong,
           shop_points: checkShopPoints,
           bonus_hints: response.data[i].bonus,
-          history_date: timeAgo(jsDate2.setSeconds(jsDate2.getSeconds() - 104)),
+          history_date: timeAgo(jsDate2.setSeconds(jsDate2.getSeconds() - 3)),
         });
       }
     }
@@ -309,7 +385,7 @@ function Profile() {
   };
 
   const data1 = {
-    labels: ["corecte", "gresite"],
+    labels: ["Correct", "Wrong"],
     datasets: [
       {
         data: [easy22correct, easy22wrong],
@@ -321,7 +397,7 @@ function Profile() {
   };
 
   const data2 = {
-    labels: ["corecte", "gresite"],
+    labels: ["Correct", "Wrong"],
     datasets: [
       {
         data: [hard22correct, hard22wrong],
@@ -333,7 +409,7 @@ function Profile() {
   };
 
   const data3 = {
-    labels: ["corecte", "gresite"],
+    labels: ["Correct", "Wrong"],
     datasets: [
       {
         data: [easy44correct, easy44wrong],
@@ -345,7 +421,7 @@ function Profile() {
   };
 
   const data4 = {
-    labels: ["corecte", "gresite"],
+    labels: ["Correct", "Wrong"],
     datasets: [
       {
         data: [hard44correct, hard44wrong],
@@ -367,9 +443,13 @@ function Profile() {
   const handleOk = async () => {
     setConfirmLoading(true);
 
-    const response = await Axios.post("https://licenta-server-production.up.railway.app/change-pfp", {
-      id: authState.id,
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-pfp", {
       pfp_name: pfpClicked,
+    },
+    {
+      headers: {
+    "x-access-token": localStorage.getItem("token"),
+      }
     });
     if (response.data.type === "success") {
       notification[response.data.type]({
@@ -394,16 +474,23 @@ function Profile() {
 
   const handleCancelUsername = () => {
     setOpenUsername(false);
+    values.username = ""
+    errors.username = ""
+    touched.username = false
   };
 
   const changeUsername = async (values, actions) => {
     setConfirmLoadingUsername(true);
-    const response = await Axios.post("https://licenta-server-production.up.railway.app/change-username", {
-        token: localStorage.getItem("token"),
-        id: authState.id,
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-username", {
         username: values.username,
-        
-    });
+    },
+    {
+      headers: {
+    "x-access-token": localStorage.getItem("token"),
+      }
+    }
+    );
+
     notification[response.data.type]({
       message: response.data.message,
       description: response.data.description,
@@ -424,33 +511,178 @@ function Profile() {
     onSubmit: changeUsername,
   });
   
+    // modal password
+    const showPasswordModal = () => {
+      setOpenPassword(true);
+    };
+  
+  
+    const handleCancelPassword = () => {
+      setOpenPassword(false);
+      formik.values.currentPassword = ""
+      formik.values.newPassword = ""
+      formik.values.confirmNewPassword = ""
+
+      formik.errors.currentPassword = ""
+      formik.errors.newPassword = ""
+      formik.errors.confirmNewPassword = ""
+
+      formik.touched.currentPassword = false
+      formik.touched.newPassword = false
+      formik.touched.confirmNewPassword = false
+    };
+  
+    const changePassword = async (values, actions) => {
+      setConfirmLoadingPassword(true);
+      const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-password", {
+          newPassword: values.newPassword,
+          currentPassword: values.currentPassword
+      },
+      {
+        headers: {
+      "x-access-token": localStorage.getItem("token"),
+        }
+      }
+      );
+
+      if (response.data.type === "error") {
+        notification[response.data.type]({
+        message: response.data.message,
+        description: response.data.description,
+      });
+      }
+      else{
+        notification[response.data.type]({
+          message: response.data.message,
+          description: response.data.description,
+        });
+        setOpenPassword(false);
+        actions.resetForm();
+      
+      }
+      setConfirmLoadingPassword(false);
+    };
+
+    const formik = useFormik({
+      initialValues: {
+        currentPassword: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      },
+      validationSchema: schemaChangePassword,
+      onSubmit: changePassword,
+    });
+
+  //modal RP info
+
+  const [openRP, setOpenRP] = useState(false);
+
+  const showModalRP = () =>{
+    setOpenRP(true);
+  }
+
+  const handleCancelRP = () =>{
+    setOpenRP(false);
+  }
   return (
     <>
       <Menu />
-      {pageLoading? <p>ma incararc bos</p>: <p>mam ancarcat</p>}
+      
       <div className="profile">
         <div className="chenar-profil-stats">
-        <div className="chenar-profil">
-          <div className="chenar-wrapper">
+          <div className="chenar-profil">
+          {pageLoading? (
+              <div className="loading-locked-statistics">
+                <Spin indicator={antIcon} />
+              </div>
+            ) : (<div className="chenar-wrapper">
+            <div style={{display: 'flex', flexDirection: 'column',alignItems: "center"}}>
+          <div
+              style={{
+                width: "300px",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                margin: "-20px 0 -4px 0",
+              }}
+            >
+              <Modal
+              bodyStyle={{ backgroundColor: "#303952" }}
+      open={openRP}
+      title="Rank Points Info"
+      onCancel={handleCancelRP}
+      footer={null}
+    >
+      <div className="container-modal-rp">
+      RP means "Rank Points" and can be obtained from the correct answers according to the table below:
+      <table>
+  <thead>
+  <tr>
+      <th>Game Mode</th>
+      <th>RP</th>
+  </tr>
+  </thead>
+  <tr>
+      <td>Easy 2x2</td>
+      <td>1</td>
+  </tr>
+  <tr>
+      <td>Hard 2x2</td>
+      <td>2</td>
+  </tr>
+  <tr>
+      <td>Easy 4x4</td>
+      <td>3</td>
+  </tr>
+  <tr>
+      <td>Hard 4x4</td>
+      <td>5</td>
+  </tr>
+
+</table>
+<p>The distribution of ranks is done in the following way:</p>
+<div className="container-modal-rp-flex"><img style={{width: 100}} src={unranked}></img><p>0 RP</p></div>
+<div className="container-modal-rp-flex"><img style={{width: 100}} src={bronze}></img><p>between 1 RP and 52 RP</p></div>
+<div className="container-modal-rp-flex"><img style={{width: 100}} src={silver}></img><p>between 53 RP and 140 RP</p></div>
+<div className="container-modal-rp-flex"><img style={{width: 100}} src={gold}></img><p>between 141 RP and 316 RP</p></div>
+<div className="container-modal-rp-flex"><img style={{width: 100}} src={platinum}></img><p>between 317 RP and 600 RP</p></div>
+<div className="container-modal-rp-flex"><img style={{width: 100}} src={diamond}></img><p>between 601 RP and 1060 RP</p></div>
+<div className="container-modal-rp-flex"><img style={{width: 100}} src={master}></img><p>between 1061 RP and 1770 RP</p></div>
+<div className="container-modal-rp-flex"><img style={{width: 100}} src={challenger}></img><p>1771 RP</p></div>
+</div>
+    </Modal>
+              <img onClick={showModalRP} style = {{width: 50, cursor: 'pointer'}} src={question_mark}></img>
+              <img style={{ width: "120px" }} src={rank}></img>
+              <p className="text-rp" style={{ margin: "0" }}>{`${rankPoints} RP`}</p>
+            </div>
+            <div style={{width: 220}}><Progress percent={`${percentage}`} size="small" status="active" /></div>
+            </div>
+            
             <img
               className="img-profil"
               style={{ width: "200px", height: "200px" }}
               src={`data:image;base64,${authState.pfp_src}`}
             ></img>
             <h2>Username: {authState.username}</h2>
-            <button className="changepfp" onClick={showUsernameModal}>Change Username</button>
-            <button className="changepfp">Change Password</button>
-            <button className="changepfp">Change Email</button>
             <button onClick={showModal} className="changepfp">
-              Change Avatar
+              Change Avatar & Background
             </button>
-            
+            <button className="changepfp" onClick={showUsernameModal}>
+              Change Username
+            </button>
+            <button className="changepfp" onClick={showPasswordModal}>
+              Change Password
+            </button>
+            <button className="changepfp">Change Email</button>
+
             <p className="date-created">Email: {userEmail}</p>
-            <p className="date-created">Account created on: {timeAgoCreated(dataCreated3)}</p>
-            
+            <p className="date-created">
+              Account created on: {timeAgoCreated(dataCreated3)}
+            </p>
+
             <Modal
-              title="Change Avatar"
-              bodyStyle={{ backgroundColor: "#d0d5df" }}
+              title="Change Avatar & Background from Leaderboard"
+              bodyStyle={{ backgroundColor: "#303952" }}
               open={open}
               onOk={handleOk}
               confirmLoading={confirmLoading}
@@ -469,164 +701,286 @@ function Profile() {
             </Modal>
 
             <Modal
+              title="Change Password"
+              bodyStyle={{ backgroundColor: "#303952" }}
+              open={openPassword}
+              onOk={formik.handleSubmit}
+              confirmLoading={confirmLoadingPassword}
+              onCancel={handleCancelPassword}
+            >
+              <input
+                type="password"
+                placeholder="Current password"
+                id="currentPassword"
+                value={formik.values.currentPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                style={{ width: "270px" }}
+                className={
+                  formik.errors.currentPassword &&
+                  formik.touched.currentPassword
+                    ? "input-error"
+                    : "password"
+                }
+              />
+              {formik.errors.currentPassword &&
+                formik.touched.currentPassword && (
+                  <p className="error-message-change-username">
+                    {formik.errors.currentPassword}
+                  </p>
+                )}
+
+              <input
+                type="password"
+                placeholder="New password"
+                id="newPassword"
+                value={formik.values.newPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                style={{ width: "270px" }}
+                className={
+                  formik.errors.newPassword && formik.touched.newPassword
+                    ? "input-error"
+                    : "password"
+                }
+              />
+              {formik.errors.newPassword && formik.touched.newPassword && (
+                <p className="error-message-change-username">
+                  {formik.errors.newPassword}
+                </p>
+              )}
+
+              <input
+                type="password"
+                placeholder="Confirm new password"
+                id="confirmNewPassword"
+                value={formik.values.confirmNewPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                style={{ width: "270px" }}
+                className={
+                  formik.errors.confirmNewPassword &&
+                  formik.touched.confirmNewPassword
+                    ? "input-error"
+                    : "password"
+                }
+              />
+              {formik.errors.confirmNewPassword &&
+                formik.touched.confirmNewPassword && (
+                  <p className="error-message-change-username">
+                    {formik.errors.confirmNewPassword}
+                  </p>
+                )}
+            </Modal>
+
+            <Modal
               title="Change Username"
-              bodyStyle={{ backgroundColor: "#d0d5df" }}
+              bodyStyle={{ backgroundColor: "#303952" }}
               open={openUsername}
               onOk={handleSubmit}
               confirmLoading={confirmLoadingUsername}
               onCancel={handleCancelUsername}
             >
-              <input type="text" placeholder="Username"
-              id="username"
-              value={values.username}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              style={{width:"270px"}}
-              className={errors.username && touched.username ? "input-error" : "username"}
+              <input
+                type="text"
+                placeholder="Username"
+                id="username"
+                value={values.username}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                style={{ width: "270px" }}
+                className={
+                  errors.username && touched.username
+                    ? "input-error"
+                    : "username"
+                }
               />
-              {errors.username && touched.username && <p className="error-message-change-username">{errors.username}</p>}
-              
+              {errors.username && touched.username && (
+                <p className="error-message-change-username">
+                  {errors.username}
+                </p>
+              )}
             </Modal>
+          </div>)}
           </div>
-        </div>
-        <div className="chenar-stats">
-          <div className="flex-row">
-            <div className="pie-charts">
-              <Pie
-                data={data1}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    title: {
-                      display: true,
-                      text:
-                        "Easy 2x2 correct answer rate: " +
-                        (
-                          (easy22correct / (easy22correct + easy22wrong)) *
-                          100
-                        ).toFixed(2) +
-                        "%",
-                      position: "top",
-                      align: "center",
-                      color: "#00a8ff",
-                      font: {
-                        size: 15,
-                      },
-                    },
-                    legend: {
-                      labels: {
-                        color: "#ecf0f1",
-                      },
-                    },
-                  },
-                }}
-              />
-            </div>
+          <div className="chenar-stats">
+            {pageLoading ? (
+              <div className="loading-locked-statistics">
+                <Spin indicator={antIcon} />
+              </div>
+            ) : (
+              <>
+                {statisticsLocked ? (
+                  <>
+                    <div className="loading-locked-statistics">
+                      <p className="chenar-stats-locked-text">
+                        Statistics are locked until you play a game of each mode
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex-row">
+                      <div className="pie-charts">
+                        <Pie
+                          data={data1}
+                          options={{
+                            responsive: true,
+                            plugins: {
+                              title: {
+                                display: true,
+                                text:
+                                  "Easy 2x2 correct answer rate: " +
+                                  (
+                                    (easy22correct /
+                                      (easy22correct + easy22wrong)) *
+                                    100
+                                  ).toFixed(2) +
+                                  "%",
+                                position: "top",
+                                align: "center",
+                                color: "#00a8ff",
+                                font: {
+                                  size: 15,
+                                },
+                              },
+                              legend: {
+                                labels: {
+                                  color: "#ecf0f1",
+                                },
+                              },
+                            },
+                          }}
+                        />
+                        <p className="remaining-text">
+                          Remaining to guess: {161 - easy22correct}/161
+                        </p>
+                      </div>
 
-            <div className="pie-charts">
-              <Pie
-                data={data2}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    title: {
-                      display: true,
-                      text:
-                        "Hard 2x2 correct answer rate: " +
-                        (
-                          (hard22correct / (hard22correct + hard22wrong)) *
-                          100
-                        ).toFixed(2) +
-                        "%",
-                      position: "top",
-                      align: "center",
-                      color: "#00a8ff",
-                      font: {
-                        size: 15,
-                      },
-                    },
-                    legend: {
-                      labels: {
-                        color: "#ecf0f1",
-                      },
-                    },
-                  },
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex-row">
-            <div className="pie-charts">
-              <Pie
-                data={data3}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    title: {
-                      display: true,
-                      text:
-                        "Easy 4x4 correct answer rate: " +
-                        (
-                          (easy44correct / (easy44correct + easy44wrong)) *
-                          100
-                        ).toFixed(2) +
-                        "%",
-                      position: "top",
-                      align: "center",
-                      color: "#00a8ff",
-                      font: {
-                        size: 15,
-                      },
-                    },
-                    legend: {
-                      labels: {
-                        color: "#ecf0f1",
-                      },
-                    },
-                  },
-                }}
-              />
-            </div>
+                      <div className="pie-charts">
+                        <Pie
+                          data={data2}
+                          options={{
+                            responsive: true,
+                            plugins: {
+                              title: {
+                                display: true,
+                                text:
+                                  "Hard 2x2 correct answer rate: " +
+                                  (
+                                    (hard22correct /
+                                      (hard22correct + hard22wrong)) *
+                                    100
+                                  ).toFixed(2) +
+                                  "%",
+                                position: "top",
+                                align: "center",
+                                color: "#00a8ff",
+                                font: {
+                                  size: 15,
+                                },
+                              },
+                              legend: {
+                                labels: {
+                                  color: "#ecf0f1",
+                                },
+                              },
+                            },
+                          }}
+                        />
+                        <p className="remaining-text">
+                          Remaining to guess: {161 - hard22correct}/161
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex-row">
+                      <div className="pie-charts">
+                        <Pie
+                          data={data3}
+                          options={{
+                            responsive: true,
+                            plugins: {
+                              title: {
+                                display: true,
+                                text:
+                                  "Easy 4x4 correct answer rate: " +
+                                  (
+                                    (easy44correct /
+                                      (easy44correct + easy44wrong)) *
+                                    100
+                                  ).toFixed(2) +
+                                  "%",
+                                position: "top",
+                                align: "center",
+                                color: "#00a8ff",
+                                font: {
+                                  size: 15,
+                                },
+                              },
+                              legend: {
+                                labels: {
+                                  color: "#ecf0f1",
+                                },
+                              },
+                            },
+                          }}
+                        />
+                        <p className="remaining-text">
+                          Remaining to guess: {161 - easy44correct}/161
+                        </p>
+                      </div>
 
-            <div className="pie-charts">
-              <Pie
-                data={data4}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    title: {
-                      display: true,
-                      text:
-                        "Hard 4x4 correct answer rate: " +
-                        (
-                          (hard44correct / (hard44correct + hard44wrong)) *
-                          100
-                        ).toFixed(2) +
-                        "%",
-                      position: "top",
-                      align: "center",
-                      color: "#00a8ff",
-                      font: {
-                        size: 15,
-                      },
-                    },
-                    legend: {
-                      labels: {
-                        color: "#ecf0f1",
-                      },
-                    },
-                  },
-                }}
-              />
-            </div>
+                      <div className="pie-charts">
+                        <Pie
+                          data={data4}
+                          options={{
+                            responsive: true,
+                            plugins: {
+                              title: {
+                                display: true,
+                                text:
+                                  "Hard 4x4 correct answer rate: " +
+                                  (
+                                    (hard44correct /
+                                      (hard44correct + hard44wrong)) *
+                                    100
+                                  ).toFixed(2) +
+                                  "%",
+                                position: "top",
+                                align: "center",
+                                color: "#00a8ff",
+                                font: {
+                                  size: 15,
+                                },
+                              },
+                              legend: {
+                                labels: {
+                                  color: "#ecf0f1",
+                                },
+                              },
+                            },
+                          }}
+                        />
+                        <p className="remaining-text">
+                          Remaining to guess: {161 - hard44correct}/161
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
           </div>
-        </div>
         </div>
         <div className="chenar-history">
           <Table
             columns={columns}
             dataSource={loadingTable ? [] : data_history}
-            rowClassName={(record, index) => record.correct_wrong==="Wrong" ? 'table-row-wrong' :  'table-row-correct'}
+            rowClassName={(record, index) =>
+              record.correct_wrong === "Wrong"
+                ? "table-row-wrong"
+                : "table-row-correct"
+            }
             bordered={true}
           />
         </div>

@@ -12,8 +12,8 @@ import "antd/lib/notification/style/index.css";
 import FlipNumbers from 'react-flip-numbers';
 
 let champions;
-// "http://localhost:3001"
-let url = "http://localhost:3001";
+// "https://daniel-licenta-api.herokuapp.com"
+let url = "https://daniel-licenta-api.herokuapp.com";
 
 function Easy44(prop) {
 
@@ -335,7 +335,7 @@ function Easy44(prop) {
         <input id="filter"
           placeholder="Type champion name..."
           name="filter"
-          type="text"
+          type="textt"
           value={filter}
           onChange={event => setFilter(event.target.value)}
           autoComplete = "off"

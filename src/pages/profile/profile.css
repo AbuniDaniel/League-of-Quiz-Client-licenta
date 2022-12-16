@@ -5,7 +5,7 @@
     margin-top: 20px;
     text-align: center;
     width: 1300px;
-    height: 1400px;
+    height: 1500px;
     margin-top: 3%;
     display:flex;
     flex-direction: column;
@@ -15,8 +15,8 @@
 
 .chenar-profil{
     background-color: #2e3044;
-    height: 550px;
-    width: 24%;
+    height: 680px;
+    width: 25%;
     border-radius: 15px;
     margin-top: 15px;
     padding: 30px;
@@ -24,7 +24,7 @@
 
 .chenar-stats{
     background-color: #2e3044;
-    height: 540px;
+    height: 670px;
     width: 52%;
     border-radius: 15px;
     margin-top: 15px;
@@ -35,7 +35,7 @@
 
 .img-profil {
     display: flex;
-    margin:0 auto;
+    margin:10px auto 0 auto;
 }
 
 .chenar-wrapper{
@@ -83,13 +83,13 @@
 }
 
 .pie-charts{
-    width: 260px;
+    width: 270px;
 }
 .flex-row{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
 }
 .chenar-profil-stats{
     display: flex;
@@ -148,7 +148,75 @@
 }
 
 .error-message-change-username{
-    color: #f81a1a;
+    color: #fc8181;
     font-size: 0.85rem;
     text-align: center;
+}
+
+.ant-modal-close-x svg{
+    fill: #d0d5df !important;
+}
+
+.ant-modal-title{
+    color: #d0d5df !important;
+}
+
+.chenar-stats-locked-text{
+    margin: 0;
+    color: rgb(29, 170, 206);
+    font-size: 1.6rem;
+}
+
+.loading-locked-statistics{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.remaining-text{
+    color: #d0d5df;
+    margin: 6px 0;
+}
+
+.ant-progress-text{
+    color: #d0d5df !important;
+}
+
+.text-rp{
+    color: #d0d5df;
+    font-size: 1.5rem;
+}
+
+.container-modal-rp{
+    color: #d0d5df;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container-modal-rp-flex{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.container-modal-rp table {
+    border-collapse:separate;
+    border:solid #d0d5df 1px;
+    border-radius:7px;
+}
+
+.container-modal-rp td, .container-modal-rp th {
+    border-left:solid #d0d5df 1px;
+    border-top:solid #d0d5df 1px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.container-modal-rp th {
+    border-top: none;
+}
+
+.container-modal-rp td:first-child, .container-modal-rp th:first-child {
+     border-left: none;
 }

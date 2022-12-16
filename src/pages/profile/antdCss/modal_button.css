@@ -1585,9 +1585,8 @@ ul ol {
   .ant-modal-header {
     padding: 16px 24px;
     color: rgba(0, 0, 0, 0.85);
-    background: #fff;
-    border-bottom: 1px solid #f0f0f0;
-    border-radius: 2px 2px 0 0;
+    background: rgb( 33, 41, 66 );
+
   }
   .ant-modal-body {
     padding: 24px;
@@ -1598,9 +1597,8 @@ ul ol {
   .ant-modal-footer {
     padding: 10px 16px;
     text-align: right;
-    background: transparent;
-    border-top: 1px solid #f0f0f0;
-    border-radius: 0 0 2px 2px;
+    background: rgb( 33, 41, 66 );
+
   }
   .ant-modal-footer .ant-btn + .ant-btn:not(.ant-dropdown-trigger) {
     margin-bottom: 0;

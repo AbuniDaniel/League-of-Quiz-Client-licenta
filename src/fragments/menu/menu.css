@@ -71,7 +71,7 @@
 	left: 210px;
 	background-color: #e74c3c;
 }
-.nav .start-login, .navLogged .start-login, .nav-link:nth-child(4):hover~.animation {
+.nav .start-login, .nav .start-shop, .navLogged .start-login, .navLogged .start-shop, .nav-link:nth-child(4):hover~.animation {
 	width: 160px;
 	left: 370px;
 	background-color: #9b59b6;
@@ -82,7 +82,7 @@
 	background-color: #e67e22;
 }
 
-.nav .start-shop, .navLogged .start-shop, .nav-link:nth-child(6):hover~.animation {
+.nav-link:nth-child(6):hover~.animation {
 	width: 120px;
 	left: 650px;
 	background-color: #e6e322;

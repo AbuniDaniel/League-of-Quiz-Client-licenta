@@ -10,6 +10,8 @@ import Axios from "axios";
 import { authContext } from "./helpers/authContext";
 import EmailVerify from "./pages/emailVerify/emailVerify";
 import ResetPass from "./pages/resetPass/resetPass";
+import UserProfile from "./pages/userProfile/userProfile";
+import Shop from "./pages/shop/shop";
 
 function App() {
 
@@ -25,7 +27,7 @@ function App() {
   useEffect(() => {
     const fetchUserAuth = async () => {
       const response = await Axios
-      .get("https://licenta-server-production.up.railway.app/isUserAuth", {
+      .get("https://daniel-licenta-api.herokuapp.com/isUserAuth", {
         headers: {
 			"x-access-token": localStorage.getItem("token"),
         },
@@ -62,6 +64,8 @@ function App() {
           <Route path="/myprofile" element={<Profile />} />
           <Route path="/users/:id/verify-email" element={<EmailVerify/>} />
           <Route path="/users/:id/reset-pass" element={<ResetPass/>} />
+          <Route path="/users/profile/:username" element={<UserProfile/>} />
+          <Route path="/shop" element={<Shop/>} />
         </Routes>
       </Router>
     </authContext.Provider>
