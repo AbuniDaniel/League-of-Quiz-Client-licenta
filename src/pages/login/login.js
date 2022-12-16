@@ -31,11 +31,7 @@ function Login() {
 
   const forgotPass = async (values, actions) => {
     setConfirmLoadingForgot(true);
-<<<<<<< HEAD
     const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/forgot-password", {
-=======
-    const response = await Axios.post("https://licenta-server-production.up.railway.app/forgot-password", {
->>>>>>> d152a659067542659459ec91b88655c14cd68106
         email: values.email,
         
     });
@@ -67,11 +63,7 @@ function Login() {
 
   const login = (event) => {
     event.preventDefault();
-<<<<<<< HEAD
     Axios.post("https://daniel-licenta-api.herokuapp.com/login", {
-=======
-    Axios.post("https://licenta-server-production.up.railway.app/login", {
->>>>>>> d152a659067542659459ec91b88655c14cd68106
       email: email,
       password: password,
     }).then((response) => {
