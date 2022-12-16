@@ -15,13 +15,8 @@ import FlipNumbers from 'react-flip-numbers';
 
 
 let champions;
-<<<<<<< HEAD
 // "https://daniel-licenta-api.herokuapp.com"
 let url = "https://daniel-licenta-api.herokuapp.com";
-=======
-// "http://localhost:3001"
-let url = "https://licenta-server-production.up.railway.app";
->>>>>>> d152a659067542659459ec91b88655c14cd68106
 
 
 function Easy22(prop) {
