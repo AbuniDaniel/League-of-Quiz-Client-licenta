@@ -67,6 +67,7 @@ function Profile() {
   const [rankPoints, setRankPoints] = useState(0);
   const [percentage, setPercentage] = useState(0);
   const [pfps, setPfps] = useState([]);
+  const [userBg, setUserBg] = useState([]);
 
   const [pfpClicked, setPfpClicked] = useState("");
 
@@ -151,7 +152,7 @@ function Profile() {
     myProfile();
     fetchPfps();
     fetchUserHistory();
-
+    fetchUserBg();
   }, [authState]);
 
   let profile, pfp, userHistory
@@ -219,10 +220,30 @@ function Profile() {
   };
 
   const fetchPfps = async () => {
-    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/pfp-options");
-    pfp = response;
+    const response = await Axios.post(
+      "https://daniel-licenta-api.herokuapp.com/user-pfps",
+      {},
+      {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      }
+    );
     setPageLoading(false)
     setPfps(response.data);
+  };
+
+  const fetchUserBg = async () => {
+    const response = await Axios.post(
+      "https://daniel-licenta-api.herokuapp.com/user-bg",
+      {},
+      {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    setUserBg(response.data);
   };
 
   //legat de x minutes ago
@@ -432,8 +453,47 @@ function Profile() {
     ],
   };
 
-  const pfpClick = (name) => {
-    setPfpClicked(name);
+  const changePfp = async (pfp_name) => {
+    setConfirmLoading(true);
+
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-pfp", {
+      pfp_name: pfp_name,
+    },
+    {
+      headers: {
+    "x-access-token": localStorage.getItem("token"),
+      }
+    });
+    if (response.data.type === "success") {
+      notification[response.data.type]({
+        message: response.data.message,
+        description: response.data.description,
+      });
+      setAuthState({ ...authState, pfp_src: response.data.pfp_src})
+      setOpen(false);
+    }
+    setConfirmLoading(false);
+  };
+
+  const changeBg = async (bg_name) => {
+    setConfirmLoading(true);
+
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-bg", {
+      bg_name: bg_name,
+    },
+    {
+      headers: {
+    "x-access-token": localStorage.getItem("token"),
+      }
+    });
+    if (response.data.type === "success") {
+      notification[response.data.type]({
+        message: response.data.message,
+        description: response.data.description,
+      });
+      setOpen(false);
+    }
+    setConfirmLoading(false);
   };
 
   // modal avatar
@@ -681,23 +741,38 @@ function Profile() {
             </p>
 
             <Modal
-              title="Change Avatar & Background from Leaderboard"
+              title="Change Avatar & Backgrounds for Leaderboard"
               bodyStyle={{ backgroundColor: "#303952" }}
               open={open}
               onOk={handleOk}
               confirmLoading={confirmLoading}
               onCancel={handleCancel}
+              footer={null}
               width={1188}
             >
+              <h2 className="text-avatars">Avatars</h2>
               {pfps.map((val, key) => {
                 return (
+                  <>
                   <img
-                    className="changePfpImg"
-                    onClick={() => pfpClick(val.pfp_name)}
-                    src={`data:image;base64,${val.src}`}
-                  ></img>
+                  className="changePfpImg"
+                  onClick={() => changePfp(val.pfp_name)}
+                  src={`data:image;base64,${val.src}`}
+                ></img></>
                 );
               })}
+              <h2 className="text-avatars">Leaderbord Backgrounds</h2>
+              <div className="container-change-bg">
+              {userBg.map((val, key) => {
+            return (
+              <>
+                <div className="change-background" onClick={() => changeBg(val.bg_name)}>
+                <div className={val.bg_name} style={{height: 70, width: 200}}></div>
+                </div>
+              </>
+            );
+          })}
+          </div>
             </Modal>
 
             <Modal

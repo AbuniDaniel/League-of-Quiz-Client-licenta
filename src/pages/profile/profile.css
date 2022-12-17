@@ -220,3 +220,33 @@
 .container-modal-rp td:first-child, .container-modal-rp th:first-child {
      border-left: none;
 }
+
+.text-avatars{
+    color: rgb(29, 170, 206);
+    text-align: center;
+}
+
+.container-change-bg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-background{
+    transition: 0.3s;
+    border: 3px solid transparent;
+    border-radius: 3px;
+    text-align: center;
+    margin-top: 15px;
+    margin-right: 30px;
+    width: 202px;
+    height: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.change-background:hover{
+    border-color:#4822d4;
+}

@@ -40,6 +40,7 @@ function App() {
           email: response.data.user.email,
           id: response.data.user.id,
           pfp_src: response.data.result[0].src,
+          coins: response.data.user_coins,
           status: true,
         });
       }

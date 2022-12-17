@@ -22,7 +22,7 @@ let url = "https://daniel-licenta-api.herokuapp.com";
 function Easy22(prop) {
   const navigate = useNavigate();
 
-  const { authState } = useContext(authContext);
+  const { authState, setAuthState } = useContext(authContext);
 
   const [filter, setFilter] = useState('');
   const [imgpath, setImgPath] = useState("");
@@ -66,7 +66,7 @@ function Easy22(prop) {
       hintAmount();
   }
   // eslint-disable-next-line
-  }, [authState]);
+  }, []);
   const checkAnswer = async () => {
     console.log(authState.username);
     setIsButtonDisabled(true)
@@ -82,8 +82,7 @@ function Easy22(prop) {
         imgpath: imgpath,
         game_type: prop.selectGame,
         dificulty: dificulty,
-      })
-
+      }) 
       notification[response.data.type]({
         message: response.data.message,
         description: response.data.description,
@@ -99,12 +98,14 @@ function Easy22(prop) {
 
       setFilter("");
       if(response.data.type === "success"){
+        setAuthState({ ...authState, coins: response.data.coins+authState.coins})
         setImgPath("");
         setIsVisible1(false);
       setIsVisible2(false);
       setIsVisible3(false);
       setIsVisible4(false);
         restartGame();
+      
       } 
       }
       else{

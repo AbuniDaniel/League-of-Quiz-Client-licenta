@@ -12,12 +12,12 @@ import "antd/lib/notification/style/index.css";
 import FlipNumbers from 'react-flip-numbers';
 
 let champions;
-// "http://localhost:3001"
+// "https://daniel-licenta-api.herokuapp.com"
 let url = "https://daniel-licenta-api.herokuapp.com";
 
 function Easy44(prop) {
 
-  const { authState } = useContext(authContext);
+  const { authState, setAuthState } = useContext(authContext);
 
   const [filter, setFilter] = useState('');
   const [imgpath, setImgPath] = useState("");
@@ -84,7 +84,7 @@ function Easy44(prop) {
       hintAmount();
   }
   // eslint-disable-next-line
-  }, [authState]);
+  }, []);
 
   const checkAnswer = async () => {
     setIsButtonDisabled(true)
@@ -117,6 +117,7 @@ function Easy44(prop) {
 
       setFilter("");
       if(response.data.type === "success"){
+        setAuthState({ ...authState, coins: authState.coins+response.data.coins})
         setImgPath("");
         setIsVisible1(false);
       setIsVisible2(false);

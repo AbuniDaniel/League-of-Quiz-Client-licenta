@@ -92,3 +92,8 @@ button{
 	background: none;
 	border: none;
 }
+
+.coins-text{
+	display: inline-flex;
+	margin-left: 4px;
+}

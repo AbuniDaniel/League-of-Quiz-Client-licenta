@@ -83,6 +83,7 @@ function Login() {
           email: response.data.email,
           id: response.data.id,
           pfp_src: response.data.pfp_src,
+          coins: response.data.coins,
           status: true,
         });
         navigate("/play");

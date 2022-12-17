@@ -5,7 +5,7 @@
     margin-top: 20px;
     text-align: center;
     width: 1000px;
-    height: 800px;
+    height: 1200px;
     margin-top: 3%;
     display:flex;
     flex-direction: column;
@@ -73,4 +73,22 @@
     transition: 0.3s;
     align-items: center;
     pointer-events: none;
+}
+
+.container-background{
+    border: 2px solid rgb(94, 113, 182);
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 25px;
+    width: 240px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.text-shop{
+    color: rgb(29, 170, 206);
+    margin-bottom: -80px;
 }

@@ -1,25 +1,37 @@
 import "./shop.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Axios from "axios";
 import Menu from "../../fragments/menu/menu";
 import { notification } from "antd";
 import "antd/lib/notification/style/index.css";
 import points from "./points.png";
+import { authContext } from "../../helpers/authContext"
 
 function Shop() {
   const [pfps, setPfps] = useState([]);
-  const [userPfps, setUSerPfps] = useState([]);
+  const [bgs, setBgs] = useState([]);
+  const [userPfps, setUserPfps] = useState([]);
+  const [userBg, setUserBg] = useState([]);
+  const { authState, setAuthState } = useContext(authContext);
 
   useEffect(() => {
-    fetchShop();
+    fetchShopPfps();
     fetchUserPfps();
+    fetchShopBg();
+    fetchUserBg();
   }, []);
 
-  const fetchShop = async () => {
-    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/shop");
+  const fetchShopPfps = async () => {
+    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/shop-pfps");
     // setPageLoading(false)
     setPfps(response.data);
+  };
+
+  const fetchShopBg = async () => {
+    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/shop-bg");
+    // setPageLoading(false)
+    setBgs(response.data);
   };
 
   const fetchUserPfps = async () => {
@@ -32,13 +44,27 @@ function Shop() {
         },
       }
     );
-    setUSerPfps(response.data);
+    setUserPfps(response.data);
   };
 
-  const buyItem = async (item_name) => {
+  const fetchUserBg = async () => {
+    const response = await Axios.post(
+      "https://daniel-licenta-api.herokuapp.com/user-bg",
+      {},
+      {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    setUserBg(response.data);
+  };
+
+  const buyItem = async (item_type, item_name) => {
     const response = await Axios.post(
       "https://daniel-licenta-api.herokuapp.com/buy-item",
       {
+        item_type: item_type,
         item_name: item_name,
       },
       {
@@ -52,7 +78,9 @@ function Shop() {
         message: response.data.message,
         description: response.data.description,
       });
-      fetchUserPfps()
+      setAuthState({ ...authState, coins: response.data.coins})
+      fetchUserPfps();
+      fetchUserBg();
     }
     else{
       notification[response.data.type]({
@@ -82,7 +110,35 @@ function Shop() {
     } else {
       return (
         <>
-        <button className="buy-btn" onClick={()=>buyItem(pfp_name)}>
+        <button className="buy-btn" onClick={()=>buyItem("pfp",pfp_name)}>
+          <span>BUY</span>
+        </button>
+          
+        </>
+      );
+    }
+  };
+
+  const buyTextButtonBg = (bg_name) => {
+    let found = false;
+    for (var i = 0; i < userBg.length; ++i) {
+      if (userBg[i].bg_name == bg_name) {
+        found = true;
+        break;
+      }
+    }
+    if (found) {
+      return (
+        <>
+        <button className="buy-btn-already">
+          <span>Item Already Owned</span>
+        </button>
+        </>
+      );
+    } else {
+      return (
+        <>
+        <button className="buy-btn" onClick={()=>buyItem("bg", bg_name)}>
           <span>BUY</span>
         </button>
           
@@ -95,7 +151,7 @@ function Shop() {
     <>
       <Menu />
       <div className="container-shop">
-        <p className="text-shop">Profile Pictures</p>
+        <h2 className="text-shop">Profile Pictures</h2>
         <div className="container-images">
           {pfps.map((val, key) => {
             return (
@@ -111,7 +167,7 @@ function Shop() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        marginBottom: "5px",
+                        marginBottom: "7px",
                       }}
                     >
                       <span className="price-text">{val.price}</span>
@@ -126,7 +182,35 @@ function Shop() {
             );
           })}
         </div>
-        <p className="text-shop">Background Colors for Leaderboard</p>
+        <h2 className="text-shop">Background Colors for Leaderboard</h2>
+        
+        <div className="container-images">
+        {bgs.map((val, key) => {
+            return (
+              <>
+                <div className="container-background">
+                <div className={val.item} style={{height: 70, width: 170}}></div>
+                  <div className="container-text-buy">
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      <span className="price-text">{val.price}</span>
+                      <img style={{ width: "20px" }} src={points}></img>
+                    </div>
+
+                    {buyTextButtonBg(val.item)}
+
+                  </div>
+                </div>
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );

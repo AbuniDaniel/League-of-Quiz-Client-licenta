@@ -13,7 +13,7 @@ function Alavechi() {
 
 
   const register = () => {
-    Axios.post("http://localhost:3001/register", {
+    Axios.post("https://daniel-licenta-api.herokuapp.com/register", {
       username: usernameReg,
       password: passwordReg,
     }).then((response) => {
@@ -22,7 +22,7 @@ function Alavechi() {
   };
 
   const login = () => {
-    Axios.post("http://localhost:3001/login", {
+    Axios.post("https://daniel-licenta-api.herokuapp.com/login", {
       username: username,
       password: password,
     }).then((response) => {
@@ -36,7 +36,7 @@ function Alavechi() {
   };
 
   const userAuthenticated = () => {
-    Axios.get("http://localhost:3001/isUserAuth", 
+    Axios.get("https://daniel-licenta-api.herokuapp.com/isUserAuth", 
       {headers: {
         "x-access-token": localStorage.getItem("token"),
     }}).then((response) => {
