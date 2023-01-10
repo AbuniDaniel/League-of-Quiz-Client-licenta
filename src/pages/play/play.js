@@ -58,21 +58,21 @@ function Play() {
     <div className="select-play">
       <div className="games">
       <img src={easy22poza} alt="easy22"></img>
-      <button className="btn403" onClick={easy22}>easy22</button>
+      <button className="btn403" onClick={easy22}>Easy 2x2</button>
       </div>
       <div className="games">
       <img src={easy44poza} alt="easy44"></img>
-      <button className="btn403" onClick={easy44}>easy44</button>
+      <button className="btn403" onClick={easy44}>Easy 4x4</button>
       </div>
     </div>
     <div className="select-play2">
       <div className="games">
       <img src={easy22poza} alt="hard22"></img>
-      <button className="btn403" onClick={hard22}>hard22</button>
+      <button className="btn403" onClick={hard22}>Hard 2x2</button>
       </div>
       <div className="games">
       <img src={easy22poza} alt="hard44"></img>
-      <button className="btn403" onClick={hard44}>hard44</button>
+      <button className="btn403" onClick={hard44}>Hard 4x4</button>
       </div>
     </div>
     </>

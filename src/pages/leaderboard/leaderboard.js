@@ -110,6 +110,7 @@ function Leaderboard() {
     data_leaderboard = [];
     let rankpoints;
     let rank;
+    let place = 0;
       for (let i = 0; i < response.data.result.length; i++) {
         rankpoints = response.data.result[i].rank_points;
 
@@ -140,38 +141,36 @@ function Leaderboard() {
         else if(rankpoints == 1771){
           rank = challenger
         }
-        if(response.data.result[i].easy22correct!=0 && response.data.result[i].easy22wrong!=0 && response.data.result[i].hard22correct!=0 && response.data.result[i].hard22wrong!=0 && response.data.result[i].easy44correct!=0 && response.data.result[i].easy44wrong!=0 && response.data.result[i].hard44correct!=0 && response.data.result[i].hard44wrong!=0){
+        let easy22 = (response.data.result[i].easy22correct /
+          (response.data.result[i].easy22correct + response.data.result[i].easy22wrong)) *
+        100
+        let hard22 = (response.data.result[i].hard22correct /
+        (response.data.result[i].hard22correct + response.data.result[i].hard22wrong)) *
+      100
+        let easy44 = (response.data.result[i].easy44correct /
+        (response.data.result[i].easy44correct + response.data.result[i].easy44wrong)) *
+      100
+        let hard44 = (response.data.result[i].hard44correct /
+        (response.data.result[i].hard44correct + response.data.result[i].hard44wrong)) *
+      100
+
+        if(!isNaN(easy22) && !isNaN(hard22) && !isNaN(easy44) && !isNaN(hard44)){
+          place++;
           data_leaderboard.push({
             key: i,
-            place: i+1,
+            place: place,
             username:{username: response.data.result[i].username,
             pfp_src: (response.data.result2.find(({ pfp_name }) => pfp_name === response.data.result[i].pfp)).src},
             rank_points: {rank_points : response.data.result[i].rank_points,
               rank: rank},
             background: response.data.result[i].background_leaderboard,
-            easy22: (
-              (response.data.result[i].easy22correct /
-                (response.data.result[i].easy22correct + response.data.result[i].easy22wrong)) *
-              100
-            ).toFixed(2) +
+            easy22: easy22.toFixed(2) +
             "%",
-            hard22: (
-              (response.data.result[i].hard22correct /
-                (response.data.result[i].hard22correct + response.data.result[i].hard22wrong)) *
-              100
-            ).toFixed(2) +
+            hard22: hard22.toFixed(2) +
             "%",
-            easy44: (
-              (response.data.result[i].easy44correct /
-                (response.data.result[i].easy44correct + response.data.result[i].easy44wrong)) *
-              100
-            ).toFixed(2) +
+            easy44: easy44.toFixed(2) +
             "%",
-            hard44: (
-              (response.data.result[i].hard44correct /
-                (response.data.result[i].hard44correct + response.data.result[i].hard44wrong)) *
-              100
-            ).toFixed(2) +
+            hard44: hard44.toFixed(2) +
             "%",
           });
         }

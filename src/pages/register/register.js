@@ -25,7 +25,7 @@ function Register() {
     }else{
     notification[response.data.type]({
       message: response.data.message,
-      description: "",
+      description: response.data.description,
     });
       actions.resetForm();
       navigate("/login");

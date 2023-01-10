@@ -1,8 +1,3 @@
-/* .da{
-    background: rgb(85,80,177);
-    background: linear-gradient(90deg, rgba(85,80,177,1) 0%, rgba(133,18,181,0.5242471988795518) 50%, rgba(6,180,215,1) 100%);
-} */
-
 .gradient1{
     color:#cfd4df;
     font-size: 1rem;
@@ -11,6 +6,43 @@
 	animation: gradient1 6s ease infinite;
 	cursor: pointer;
 }
+
+.gradient2{
+    color:#cfd4df;
+    font-size: 1rem;
+	background: linear-gradient(-45deg, #16a085, #8e44ad, #e67e22, #e74c3c);
+	background-size: 200% 200%;
+	animation: gradient1 6s ease infinite;
+	cursor: pointer;
+}
+
+.gradient3{
+    color:#cfd4df;
+    font-size: 1rem;
+	background: linear-gradient(-45deg, #4caf50, #009688, #673ab7, #ff784e);
+	background-size: 200% 200%;
+	animation: gradient1 6s ease infinite;
+	cursor: pointer;
+}
+
+.gradient4{
+    color:#cfd4df;
+    font-size: 1rem;
+	background: linear-gradient(-45deg, #f78fb3, #574b90, #f19066, #c44569);
+	background-size: 200% 200%;
+	animation: gradient1 6s ease infinite;
+	cursor: pointer;
+}
+
+.gradient5{
+    color:#cfd4df;
+    font-size: 1rem;
+	background: linear-gradient(-45deg, #ff4d4d, #273c75, #17c0eb, #3ae374);
+	background-size: 200% 200%;
+	animation: gradient1 6s ease infinite;
+	cursor: pointer;
+}
+
 
 .color1{
     color:#cfd4df;
@@ -21,6 +53,55 @@
 
 .color1 .ant-table-cell-row-hover{
 	background-color: #66addb !important;
+}
+
+
+.color2{
+	color:#cfd4df;
+    font-size: 1rem;
+	background-color: #9b59b6;
+	cursor: pointer;
+}
+
+.color2 .ant-table-cell-row-hover{
+	background-color: #c472e4 !important;
+}
+
+
+.color3{
+	color:#cfd4df;
+    font-size: 1rem;
+	background-color: #e15f41;
+	cursor: pointer;
+}
+
+.color3 .ant-table-cell-row-hover{
+	background-color: #e08d7a !important;
+}
+
+
+.color4{
+	color:#cfd4df;
+    font-size: 1rem;
+	background-color: #B33771;
+	cursor: pointer;
+}
+
+.color4 .ant-table-cell-row-hover{
+	background-color: #cc4b87 !important;
+}
+
+
+
+.color5{
+	color:#cfd4df;
+    font-size: 1rem;
+	background-color: #08ac5f;
+	cursor: pointer;
+}
+
+.color5 .ant-table-cell-row-hover{
+	background-color: #1cd17d !important;
 }
 
 @keyframes gradient1 {
