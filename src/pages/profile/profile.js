@@ -396,6 +396,8 @@ function Profile() {
         }
         
         let jsDate = new Date(response.data[i].date);
+        console.log("prima data: " + jsDate)
+        console.log("a doua data: " + response.data[i].date)
         let jsDate2 = new Date(jsDate.setHours(jsDate.getHours() + 2))
         data_history.push({
           key: i,
