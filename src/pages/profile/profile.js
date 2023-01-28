@@ -437,7 +437,7 @@ function Profile() {
         let jsDate = new Date(response.data[i].date);
         console.log("prima data: " + jsDate)
         console.log("a doua data: " + response.data[i].date)
-        // let jsDate2 = new Date(jsDate.setHours(jsDate.getHours() + 2))
+        let jsDate2 = new Date(jsDate.setHours(jsDate.getHours() + 2))
         data_history.push({
           key: i,
           game_type: checkGameType,
@@ -446,7 +446,7 @@ function Profile() {
           correct_wrong: checkCorrectWrong,
           shop_points: checkShopPoints,
           bonus_hints: response.data[i].bonus,
-          history_date: timeAgo2(jsDate),
+          history_date: timeAgo(jsDate),
         });
       }
     }
