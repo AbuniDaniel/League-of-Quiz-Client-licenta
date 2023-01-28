@@ -290,7 +290,10 @@ function Profile() {
     const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
     const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
     const today = new Date();
+    console.log("data pe care o primesc sefule:     " + dateParam);
     console.log("data de pe netlify:     " + today);
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log("timezonu din dunctieeeeeeee             " +timezone); 
     const yesterday = new Date(today - DAY_IN_MS);
     const seconds = Math.round((today - date) / 1000);
     const minutes = Math.round(seconds / 60);
