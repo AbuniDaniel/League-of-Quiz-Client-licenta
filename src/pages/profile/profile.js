@@ -281,6 +281,7 @@ function Profile() {
   }
   
   function timeAgo2(date) {
+    console.log("data pe care o primesc sefule:     " + date);
     const options = {
       timeZone: "Europe/Bucharest",
       year: 'numeric',
@@ -292,6 +293,7 @@ function Profile() {
     };
     const now = new Date();
     const currentTime = new Intl.DateTimeFormat('default', options).format(now);
+    console.log("data curenta sper:     " + currentTime);
     const pastTime = new Intl.DateTimeFormat('default', options).format(date);
     const seconds = Math.floor((new Date(currentTime) - new Date(pastTime)) / 1000);
     let interval = Math.floor(seconds / 31536000);
