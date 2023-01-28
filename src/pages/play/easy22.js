@@ -35,6 +35,10 @@ function Easy22(prop) {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isHintButtonDisabled, setIsHintButtonDisabled] = useState(false);
   const [hints, setHints] = useState(0);
+
+  const [gameId, setGameId] = useState(null);
+  const [signature, setSignature] = useState(null);
+
   let imagine1, imagine2, imagine3, imagine4;
   let dificulty;
 
@@ -50,8 +54,9 @@ function Easy22(prop) {
           game_type: prop.selectGame,
           dificulty: dificulty,
         })
-          setImgPath(response.data);
-
+          setImgPath(response.data.img);
+          setGameId(response.data.gameId);
+          setSignature(response.data.signature);
           setIsVisible1(false);
           setIsVisible2(false);
           setIsVisible3(false);
@@ -82,6 +87,8 @@ function Easy22(prop) {
         imgpath: imgpath,
         game_type: prop.selectGame,
         dificulty: dificulty,
+        gameId: gameId,
+        signature: signature
       }) 
       notification[response.data.type]({
         message: response.data.message,
@@ -129,7 +136,9 @@ function Easy22(prop) {
         dificulty: dificulty,
       })
 
-      setImgPath(response.data);
+      setGameId(response.data.gameId);
+      setSignature(response.data.signature);
+      setImgPath(response.data.img);
 
       
       const response2 = await Axios.get(url+"/champion-options")

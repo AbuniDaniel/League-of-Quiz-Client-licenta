@@ -5,8 +5,10 @@ import {useState, useEffect, useContext} from "react";
 import Axios from "axios";
 import "./easy22.css";
 import "./play.css";
-import easy22poza from "./easy22.png"
-import easy44poza from "./easy44.png"
+import easy22poza from "./easy22.webp"
+import easy44poza from "./easy44.webp"
+import hard22poza from "./hard22.webp"
+import hard44poza from "./hard44.webp"
 import backButton from "./back-button.png"
 import { authContext } from "../../helpers/authContext"
 import { Result } from 'antd';
@@ -67,11 +69,11 @@ function Play() {
     </div>
     <div className="select-play2">
       <div className="games">
-      <img src={easy22poza} alt="hard22"></img>
+      <img src={hard22poza} alt="hard22"></img>
       <button className="btn403" onClick={hard22}>Hard 2x2</button>
       </div>
       <div className="games">
-      <img src={easy22poza} alt="hard44"></img>
+      <img src={hard44poza} alt="hard44"></img>
       <button className="btn403" onClick={hard44}>Hard 4x4</button>
       </div>
     </div>

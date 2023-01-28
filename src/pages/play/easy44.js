@@ -41,6 +41,10 @@ function Easy44(prop) {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isHintButtonDisabled, setIsHintButtonDisabled] = useState(false);
   const [hints, setHints] = useState(0);
+
+  const [gameId, setGameId] = useState(null);
+  const [signature, setSignature] = useState(null);
+
   let imagine1, imagine2, imagine3, imagine4, imagine5, imagine6, imagine7, imagine8, imagine9, imagine10, imagine11, imagine12, imagine13, imagine14, imagine15, imagine16;
   let dificulty;
 
@@ -56,8 +60,9 @@ function Easy44(prop) {
           game_type: prop.selectGame,
           dificulty: dificulty,
         })
-          setImgPath(response.data);
-    
+          setImgPath(response.data.img);
+          setGameId(response.data.gameId);
+          setSignature(response.data.signature);
           setIsVisible1(false);
           setIsVisible2(false);
           setIsVisible3(false);
@@ -100,6 +105,8 @@ function Easy44(prop) {
         imgpath: imgpath,
         game_type: prop.selectGame,
         dificulty: dificulty,
+        gameId: gameId,
+        signature: signature
       })
 
       notification[response.data.type]({
@@ -160,8 +167,9 @@ function Easy44(prop) {
         dificulty: dificulty,
       })
 
-      setImgPath(response.data);
-
+      setImgPath(response.data.img);
+      setGameId(response.data.gameId);
+      setSignature(response.data.signature);
       const response2 = await Axios.get(url+"/champion-options")
       champions = response2.data;
       hintFunc();

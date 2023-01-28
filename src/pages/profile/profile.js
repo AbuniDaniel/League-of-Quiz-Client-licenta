@@ -37,6 +37,7 @@ import { Spin } from "antd";
 import "antd/lib/spin/style/index.css";
 import { Progress } from 'antd';
 import "antd/lib/progress/style/index.css";
+import moment from 'moment-timezone';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -285,7 +286,7 @@ function Profile() {
     if (!dateParam) {
       return null;
     }
-  
+
     const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
     const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
     const today = new Date();
@@ -346,7 +347,7 @@ function Profile() {
     {
       data_history = [];
       for (let i = 0; i < response.data.length; i++) {
-        let jsDate = new Date(response.data[i].date);
+        console.log(response.data[i].date)
         let checkCorrectWrong;
         let checkGameType;
         let checkShopPoints = 0;
@@ -389,6 +390,8 @@ function Profile() {
           if(checkCorrectWrong === "Correct")
             checkShopPoints = 5
         }
+        
+        let jsDate = new Date(response.data[i].date);
         let jsDate2 = new Date(jsDate.setHours(jsDate.getHours() + 2))
         data_history.push({
           key: i,
@@ -398,7 +401,7 @@ function Profile() {
           correct_wrong: checkCorrectWrong,
           shop_points: checkShopPoints,
           bonus_hints: response.data[i].bonus,
-          history_date: timeAgo(jsDate2.setSeconds(jsDate2.getSeconds() - 3)),
+          history_date: timeAgo(jsDate2),
         });
       }
     }
