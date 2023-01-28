@@ -287,7 +287,7 @@ function Profile() {
       return null;
     }
 
-    const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
+    const date = dateParam;
     const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
     const today = new Date();
     console.log("data pe care o primesc sefule:     " + dateParam);
