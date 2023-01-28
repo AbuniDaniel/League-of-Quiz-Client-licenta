@@ -405,7 +405,7 @@ function Profile() {
           correct_wrong: checkCorrectWrong,
           shop_points: checkShopPoints,
           bonus_hints: response.data[i].bonus,
-          history_date: timeAgo(jsDate2),
+          history_date: timeAgo(jsDate),
         });
       }
     }
