@@ -316,7 +316,6 @@ function UserProfile() {
 
           data_history = [];
           for (let i = 0; i < response.data.length; i++) {
-            let jsDate = new Date(response.data[i].date);
             let checkCorrectWrong;
             let checkGameType;
             let checkShopPoints = 0;
@@ -359,7 +358,7 @@ function UserProfile() {
               if(checkCorrectWrong === "Correct")
                 checkShopPoints = 5
             }
-            let jsDate2 = new Date(jsDate.setHours(jsDate.getHours() + 2))
+            let jsDate = new Date(response.data[i].date);
             data_history.push({
               key: i,
               game_type: checkGameType,
@@ -368,7 +367,7 @@ function UserProfile() {
               correct_wrong: checkCorrectWrong,
               shop_points: checkShopPoints,
               bonus_hints: response.data[i].bonus,
-              history_date: timeAgo(jsDate2.setSeconds(jsDate2.getSeconds() - 3)),
+              history_date: timeAgo(jsDate),
             });
           }
 

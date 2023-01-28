@@ -279,45 +279,6 @@ function Profile() {
     // 10. January 2017. at 10:20
     return `${ day }.${ month }.${ year } at ${ hours }:${ minutes }`;
   }
-  
-  function timeAgo2(date) {
-    console.log("data pe care o primesc sefule:     " + date);
-    const options = {
-      timeZone: "Europe/Bucharest",
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-    };
-    const now = new Date();
-    const currentTime = new Intl.DateTimeFormat('default', options).format(now);
-    console.log("data curenta sper:     " + currentTime);
-    const pastTime = new Intl.DateTimeFormat('default', options).format(date);
-    const seconds = Math.floor((new Date(currentTime) - new Date(pastTime)) / 1000);
-    let interval = Math.floor(seconds / 31536000);
-    if (interval > 1) {
-      return interval + " years ago";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-      return interval + " months ago";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-      return interval + " days ago";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-      return interval + " hours ago";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) {
-      return interval + " minutes ago";
-    }
-    return Math.floor(seconds) + " seconds ago";
-  }
 
   
   // --- Main function
@@ -329,10 +290,6 @@ function Profile() {
     const date = dateParam;
     const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
     const today = new Date();
-    console.log("data pe care o primesc sefule:     " + dateParam);
-    console.log("data de pe netlify:     " + today);
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log("timezonu din dunctieeeeeeee             " +timezone); 
     const yesterday = new Date(today - DAY_IN_MS);
     const seconds = Math.round((today - date) / 1000);
     const minutes = Math.round(seconds / 60);
@@ -435,9 +392,6 @@ function Profile() {
         }
         
         let jsDate = new Date(response.data[i].date);
-        console.log("prima data: " + jsDate)
-        console.log("a doua data: " + response.data[i].date)
-        // let jsDate2 = new Date(jsDate.setHours(jsDate.getHours() + 2))
         data_history.push({
           key: i,
           game_type: checkGameType,
