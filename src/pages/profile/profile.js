@@ -280,6 +280,43 @@ function Profile() {
     return `${ day }.${ month }.${ year } at ${ hours }:${ minutes }`;
   }
   
+  function timeAgo2(date) {
+    const options = {
+      timeZone: "Europe/Bucharest",
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    };
+    const now = new Date();
+    const currentTime = new Intl.DateTimeFormat('default', options).format(now);
+    const pastTime = new Intl.DateTimeFormat('default', options).format(date);
+    const seconds = Math.floor((new Date(currentTime) - new Date(pastTime)) / 1000);
+    let interval = Math.floor(seconds / 31536000);
+    if (interval > 1) {
+      return interval + " years ago";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+      return interval + " months ago";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+      return interval + " days ago";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+      return interval + " hours ago";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+      return interval + " minutes ago";
+    }
+    return Math.floor(seconds) + " seconds ago";
+  }
+
   
   // --- Main function
   function timeAgo(dateParam) {
@@ -407,7 +444,7 @@ function Profile() {
           correct_wrong: checkCorrectWrong,
           shop_points: checkShopPoints,
           bonus_hints: response.data[i].bonus,
-          history_date: timeAgo(jsDate),
+          history_date: timeAgo2(jsDate),
         });
       }
     }
