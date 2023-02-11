@@ -12,7 +12,7 @@ import EmailVerify from "./pages/emailVerify/emailVerify";
 import ResetPass from "./pages/resetPass/resetPass";
 import UserProfile from "./pages/userProfile/userProfile";
 import Shop from "./pages/shop/shop";
-
+import Multiplayer from "./pages/multiplayer/multiplayer";
 function App() {
 
 
@@ -67,6 +67,7 @@ function App() {
           <Route path="/users/:id/reset-pass" element={<ResetPass/>} />
           <Route path="/users/profile/:username" element={<UserProfile/>} />
           <Route path="/shop" element={<Shop/>} />
+          <Route path="/multiplayer" element={<Multiplayer/>} />
         </Routes>
       </Router>
     </authContext.Provider>

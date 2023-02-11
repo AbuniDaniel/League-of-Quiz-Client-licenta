@@ -73,7 +73,6 @@ function Easy22(prop) {
   // eslint-disable-next-line
   }, []);
   const checkAnswer = async () => {
-    console.log(authState.username);
     setIsButtonDisabled(true)
       if(champions.includes(filter.charAt(0).toUpperCase() + filter.slice(1).toLowerCase())) {
         if(prop.selectGame === "easy22")
@@ -261,7 +260,7 @@ function Easy22(prop) {
         visibility: isVisible ? 'visible' : 'hidden'
       }} >
       {champions?.filter(f => f.startsWith(filter.charAt(0).toUpperCase() + filter.slice(1).toLowerCase()) && filter !== '')
-        .map(f => <button key={f} onClick={() => {setFilter(f); setIsVisible(false)}} className="hatz" >{f} </button>)}
+        .map(f =><button key={f} onClick={() => {setFilter(f); setIsVisible(false)}} className="guess-word" ><span>{f}</span> </button>)}
       </div>
       </ul>
       </div>

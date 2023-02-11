@@ -1,0 +1,77 @@
+.homeContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 3%;
+    width: 1300px;
+    flex-direction: column;
+}
+
+.home-image-chenar{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 1300px;
+    color:#cfd4df;
+    font-size: 1.1rem;
+	background: linear-gradient(-45deg, #4b5577, #282441, #463e74);
+	background-size: 200% 200%;
+	animation: gradient1 7s ease infinite;
+    border-radius: 15px;
+    padding-bottom: 30px;
+}
+
+.descriptionContainer, .howToPlayContainer{
+    color:#cfd4df;
+    text-align: center;
+    font-size: 1.2rem;
+    background-color: #2e3044;
+    border-radius: 15px;
+    padding: 35px;
+}
+
+.siteStatisticsContainer{
+    color:#cfd4df;
+    background-color: #2e3044;
+    border-radius: 15px;
+    width: 1230px;
+    display: flex;
+    justify-content: space-around;
+    padding: 35px;
+}
+
+.countUp{
+    font-size: 3.2rem;
+}
+
+.statisticsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    border-radius: 15px;
+    background-color: #262836;
+    padding: 15px;
+}
+
+.statisticsContainer p{
+    font-size: 1.3rem;
+    margin-top: 3px;
+    margin-bottom: 7px;
+}
+
+
+@keyframes gradient1 {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

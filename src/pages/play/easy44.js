@@ -361,7 +361,7 @@ function Easy44(prop) {
         visibility: isVisible ? 'visible' : 'hidden'
       }} >
       {champions?.filter(f => f.startsWith(filter.charAt(0).toUpperCase() + filter.slice(1).toLowerCase()) && filter !== '')
-        .map(f => <button key={f} onClick={() => {setFilter(f); setIsVisible(false)}} className="hatz">{f} </button>)}
+        .map(f => <button key={f} onClick={() => {setFilter(f); setIsVisible(false)}} className="guess-word"><span>{f}</span> </button>)}
       </div>
       </ul>
       </div>

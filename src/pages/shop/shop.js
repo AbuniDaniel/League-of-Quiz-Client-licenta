@@ -3,10 +3,16 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Axios from "axios";
 import Menu from "../../fragments/menu/menu";
-import { notification } from "antd";
+import { notification, Popconfirm } from "antd";
 import "antd/lib/notification/style/index.css";
+import "antd/lib/popover/style/index.css";
+import "../profile/antdCss/modal_button.css";
 import points from "./points.png";
 import { authContext } from "../../helpers/authContext"
+import hint_points from "../play/hint-button.png";
+import { Spin } from "antd";
+import "antd/lib/spin/style/index.css";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function Shop() {
   const [pfps, setPfps] = useState([]);
@@ -14,6 +20,45 @@ function Shop() {
   const [userPfps, setUserPfps] = useState([]);
   const [userBg, setUserBg] = useState([]);
   const { authState, setAuthState } = useContext(authContext);
+  const [isBuyButtonDisabled, setIsBuyButtonDisabled] = useState(false);
+  const [isBuyButtonDisabledBg, setIsBuyButtonDisabledBg] = useState(false);
+  const [amount, setAmount] = useState(0);
+
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const [loading, setLoading] = useState(true);
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 30,
+      }}
+      spin
+    />
+  );
+
+  const showPopconfirm = () => {
+    if(!isNaN(amount) && parseInt(amount) > 0)
+      setOpen(true);
+    else{
+      notification["error"]({
+        message: "Invalid amount",
+        description: '',
+      });
+    }
+  };
+  const handleOk = () => {
+    setConfirmLoading(true);
+
+    buyItem("hintPoints", amount);
+
+    setOpen(false);
+    setConfirmLoading(false);
+    
+  };
+  const handleCancel = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     fetchShopPfps();
@@ -24,13 +69,11 @@ function Shop() {
 
   const fetchShopPfps = async () => {
     const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/shop-pfps");
-    // setPageLoading(false)
     setPfps(response.data);
   };
 
   const fetchShopBg = async () => {
     const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/shop-bg");
-    // setPageLoading(false)
     setBgs(response.data);
   };
 
@@ -45,6 +88,8 @@ function Shop() {
       }
     );
     setUserPfps(response.data);
+    setIsBuyButtonDisabled(false)
+    setLoading(false)
   };
 
   const fetchUserBg = async () => {
@@ -58,36 +103,69 @@ function Shop() {
       }
     );
     setUserBg(response.data);
+    setIsBuyButtonDisabledBg(false)
   };
 
   const buyItem = async (item_type, item_name) => {
-    const response = await Axios.post(
-      "https://daniel-licenta-api.herokuapp.com/buy-item",
-      {
-        item_type: item_type,
-        item_name: item_name,
-      },
-      {
-        headers: {
-          "x-access-token": localStorage.getItem("token"),
+    setIsBuyButtonDisabled(true)
+    setIsBuyButtonDisabledBg(true)
+    if(item_type === "hintPoints"){
+      const response = await Axios.post(
+        "https://daniel-licenta-api.herokuapp.com/buy-item",
+        {
+          item_type: item_type,
+          item_name: item_name,
         },
+        {
+          headers: {
+            "x-access-token": localStorage.getItem("token"),
+          },
+        }
+      );
+      if(response.data.type === "success"){
+        notification[response.data.type]({
+          message: response.data.message,
+          description: response.data.description,
+        });
+        setAuthState({ ...authState, coins: response.data.coins})
       }
-    );
-    if(response.data.type === "success"){
-      notification[response.data.type]({
-        message: response.data.message,
-        description: response.data.description,
-      });
-      setAuthState({ ...authState, coins: response.data.coins})
-      fetchUserPfps();
-      fetchUserBg();
+      else{
+        notification[response.data.type]({
+          message: response.data.message,
+          description: response.data.description,
+        });
+      }
     }
     else{
-      notification[response.data.type]({
-        message: response.data.message,
-        description: response.data.description,
-      });
+      const response = await Axios.post(
+        "https://daniel-licenta-api.herokuapp.com/buy-item",
+        {
+          item_type: item_type,
+          item_name: item_name,
+        },
+        {
+          headers: {
+            "x-access-token": localStorage.getItem("token"),
+          },
+        }
+      );
+      if(response.data.type === "success"){
+        notification[response.data.type]({
+          message: response.data.message,
+          description: response.data.description,
+        });
+        setAuthState({ ...authState, coins: response.data.coins})
+        fetchUserPfps();
+        fetchUserBg();
+      }
+      else{
+        notification[response.data.type]({
+          message: response.data.message,
+          description: response.data.description,
+        });
+      }
     }
+    
     
   };
 
@@ -110,7 +188,7 @@ function Shop() {
     } else {
       return (
         <>
-        <button className="buy-btn" onClick={()=>buyItem("pfp",pfp_name)}>
+        <button className="buy-btn" disabled={isBuyButtonDisabled} onClick={()=>buyItem("pfp",pfp_name)}>
           <span>BUY</span>
         </button>
           
@@ -138,7 +216,7 @@ function Shop() {
     } else {
       return (
         <>
-        <button className="buy-btn" onClick={()=>buyItem("bg", bg_name)}>
+        <button className="buy-btn" disabled={isBuyButtonDisabledBg} onClick={()=>buyItem("bg", bg_name)}>
           <span>BUY</span>
         </button>
           
@@ -147,10 +225,75 @@ function Shop() {
     }
   };
 
+  const buyHintPointsText = () => {
+    return(
+      <div>
+      <span style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>Are you sure you want to buy {amount} HintPoints for {amount*3}&nbsp;<img style={{ width: "20px" }} src={points}></img></span>
+      </div>
+    )
+  }
+
   return (
     <>
       <Menu />
       <div className="container-shop">
+      {loading ? (
+          <div className="loading-shop">
+            <Spin indicator={antIcon} />
+          </div>
+        ) : (
+          <>
+            <h2 className="text-shop">HintPoints</h2>
+      <div className="container-images">
+
+                <div className="container-background">
+                <img
+                    className="hintPointsImg"
+                    src={hint_points}
+                  ></img>
+                  <div className="container-text-buy">
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      <span className="price-text">3</span>
+                      <img style={{ width: "20px" }} src={points}></img>
+                      <span className="price-text">&nbsp; = 1 Hint Point</span>
+                      
+                    </div>
+                    <input className="input-hint-points"
+                    placeholder="Amount..."
+                    type="text"
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                    }}/>
+                    <Popconfirm
+                    title={buyHintPointsText()}
+                    open={open}
+                    onConfirm={handleOk}
+                    bodyStyle={{ backgroundColor: "#303952" }}
+                    okButtonProps={{
+                      loading: confirmLoading,
+                    }}
+                    onCancel={handleCancel}
+                    >
+                    <button className="buy-btn" onClick={showPopconfirm}>
+                      <span>BUY</span>
+                    </button>
+                    </Popconfirm>
+                    
+                  </div>
+                </div>
+        </div>
+
         <h2 className="text-shop">Profile Pictures</h2>
         <div className="container-images">
           {pfps.map((val, key) => {
@@ -211,6 +354,8 @@ function Shop() {
             );
           })}
         </div>
+          </>
+        )}
       </div>
     </>
   );

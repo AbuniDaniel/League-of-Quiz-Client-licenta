@@ -32,19 +32,44 @@
     grid-template-rows: 358.5px 1fr;
     grid-gap: 0px;
     position: relative;
-    border: 5px solid #dfdfdf;
+    border: 5px solid rgb(85 90 147);
     transform: scale(0.8,0.8);
     bottom: 60px;
     }
 
-.hatz{
+.guess-word{
   cursor: pointer;
-  border: 1px solid white;
-  color: white;
+  color: #cfd4df;
+  padding: 11px 0;
+  width: 100%;
+  background: #262836;
+  
+}
+
+.guess-word:hover{
+  background: #3d4155;
+  transition: 0.3s;
+}
+
+.guess-word span{
+  border: 1px solid #c0c7d6;
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.lista{
+  background-color: #262836;
+  max-height: 200px;
+  width: 200px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+  left: 50px;
+  bottom: 33px;
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
-  
+  justify-content: space-between;
+  align-items: center;
 }
 
 input {
@@ -81,29 +106,22 @@ input {
 }
 
 .wrapper{
-  width: 60%;
+  width: 1150px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 5px auto;
   height: auto;
+  background-color: #373a4e;
+  height: 750px;
+  border: 3px solid rgb(66, 73, 97);
+  border-radius: 15px;
 }
 
 .answers-list{
   display: flex;
   flex-direction: column;
   max-height: 120px;
-}
-
-.lista{
-  background-color: #181d30;
-  max-height: 200px;
-  width: 200px;
-  overflow-y: auto;
-  position: relative;
-  z-index: 1;
-  left: 50px;
-  bottom: 33px;
 }
 
 .btn403 {

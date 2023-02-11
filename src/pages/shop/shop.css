@@ -1,15 +1,16 @@
 .container-shop{
-    border: 3px solid rgb(73, 81, 109);
+    border: 3px solid rgb(66, 73, 97);
     border-radius: 20px;
     margin: 0 auto;
     margin-top: 20px;
     text-align: center;
-    width: 1010px;
-    height: 1980px;
+    width: 1015px;
+    height: 2650px;
     margin-top: 3%;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #373a4e;
 }
 
 .container-avatar{
@@ -23,10 +24,22 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background-color: #2e3044;
 }
 
 .shopPfpImg{
     width: 200px;
+}
+
+.hintPointsImg{
+    width: 65px;
+}
+
+.input-hint-points{
+    width: 60px;
+    height: 4px;
+    margin: 0 auto;
+    margin-bottom: 7px;
 }
 
 .container-images{
@@ -89,9 +102,25 @@
     align-items: center;
     margin-right: 15px;
     margin-left: 15px;
+    background-color: #2e3044;
 }
 
 .text-shop{
     color: rgb(29, 170, 206);
     margin-bottom: -80px;
+}
+
+.ant-popover-inner{
+    background-color: rgb(77, 86, 110) !important;
+}
+
+.ant-popover-message{
+    color: #dfdeee !important;
+}
+
+.loading-shop{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 4%;
 }
