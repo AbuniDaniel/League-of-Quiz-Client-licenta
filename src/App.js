@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const fetchUserAuth = async () => {
       const response = await Axios
-      .get("https://daniel-licenta-api.herokuapp.com/isUserAuth", {
+      .get("https://leagueofquiz.netlify.app/isUserAuth", {
         headers: {
 			"x-access-token": localStorage.getItem("token"),
         },

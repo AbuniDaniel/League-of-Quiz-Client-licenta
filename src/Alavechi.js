@@ -13,7 +13,7 @@ function Alavechi() {
 
 
   const register = () => {
-    Axios.post("https://daniel-licenta-api.herokuapp.com/register", {
+    Axios.post("https://leagueofquiz.netlify.app/register", {
       username: usernameReg,
       password: passwordReg,
     }).then((response) => {
@@ -22,7 +22,7 @@ function Alavechi() {
   };
 
   const login = () => {
-    Axios.post("https://daniel-licenta-api.herokuapp.com/login", {
+    Axios.post("https://leagueofquiz.netlify.app/login", {
       username: username,
       password: password,
     }).then((response) => {
@@ -36,7 +36,7 @@ function Alavechi() {
   };
 
   const userAuthenticated = () => {
-    Axios.get("https://daniel-licenta-api.herokuapp.com/isUserAuth", 
+    Axios.get("https://leagueofquiz.netlify.app/isUserAuth", 
       {headers: {
         "x-access-token": localStorage.getItem("token"),
     }}).then((response) => {

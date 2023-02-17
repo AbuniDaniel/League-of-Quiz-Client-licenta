@@ -12,7 +12,7 @@ function Register() {
   const navigate = useNavigate();
 
   const register = (values, actions) => {
-    Axios.post("https://daniel-licenta-api.herokuapp.com/register", {
+    Axios.post("https://leagueofquiz.netlify.app/register", {
       username: values.username,
       password: values.password,
       email: values.email,

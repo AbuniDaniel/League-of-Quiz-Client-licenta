@@ -151,7 +151,7 @@ function UserProfile() {
       let profile, pfp, userHistory
       const myProfile = async () => {
 
-        const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/users/info", {
+        const response = await Axios.post("https://leagueofquiz.netlify.app/users/info", {
           username: param.username,
         });
         setProfilePicture(response.data[0].pfp)
@@ -210,7 +210,7 @@ function UserProfile() {
           setPercentage(100)
           setRank(challenger)
         }
-        const response2 = await Axios.get("https://daniel-licenta-api.herokuapp.com/pfp-options");
+        const response2 = await Axios.get("https://leagueofquiz.netlify.app/pfp-options");
         setProfilePictureSrc((response2.data.find(({ pfp_name }) => pfp_name === response.data[0].pfp)).src)
         setPageLoading(false)
       };
@@ -308,7 +308,7 @@ function UserProfile() {
       //gata legat de x minutes ago
     
       const fetchUserHistory = async () => {
-        const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/users/user-history" ,{
+        const response = await Axios.post("https://leagueofquiz.netlify.app/users/user-history" ,{
           username: param.username,
         });
         userHistory = response;
