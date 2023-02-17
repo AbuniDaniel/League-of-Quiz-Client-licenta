@@ -15,8 +15,8 @@ import FlipNumbers from 'react-flip-numbers';
 
 
 let champions;
-// "https://leagueofquiz.netlify.app"
-let url = "https://leagueofquiz.netlify.app";
+// "https://daniel-licenta-api.herokuapp.com"
+let url = "https://daniel-licenta-api.herokuapp.com";
 
 
 function Easy22(prop) {

@@ -31,7 +31,7 @@ function Login() {
 
   const forgotPass = async (values, actions) => {
     setConfirmLoadingForgot(true);
-    const response = await Axios.post("https://leagueofquiz.netlify.app/forgot-password", {
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/forgot-password", {
         email: values.email,
         
     });
@@ -63,7 +63,7 @@ function Login() {
 
   const login = (event) => {
     event.preventDefault();
-    Axios.post("https://leagueofquiz.netlify.app/login", {
+    Axios.post("https://daniel-licenta-api.herokuapp.com/login", {
       email: email,
       password: password,
     }).then((response) => {

@@ -31,7 +31,7 @@ ChartJS.register(
   Legend,
   ArcElement
 );
-const ENDPOINT = "https://leagueofquiz.netlify.app";
+const ENDPOINT = "https://daniel-licenta-api.herokuapp.com";
 const socket = io(ENDPOINT);
 let champions = [];
 
@@ -63,7 +63,7 @@ function Multiplayer() {
   useEffect(() => {
     const fetchChampions = async () => {
       const response = await Axios.get(
-        "https://leagueofquiz.netlify.app/champion-options"
+        "https://daniel-licenta-api.herokuapp.com/champion-options"
       );
       champions = response.data;
     };

@@ -34,7 +34,7 @@ function EmailVerify() {
     const verifyEmailUrl = async () => {
       let emailToken = searchParams.get("token");
       const response = await Axios.get(
-        `https://leagueofquiz.netlify.app/users/${param.id}/verify-email?token=${emailToken}`
+        `https://daniel-licenta-api.herokuapp.com/users/${param.id}/verify-email?token=${emailToken}`
       );
       if (response.data.type === "error") {
         setValidUrl(false);
