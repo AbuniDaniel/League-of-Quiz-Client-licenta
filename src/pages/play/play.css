@@ -1,20 +1,26 @@
 .select-play{
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    width: 800px;
-    margin: 7.5% auto 0 auto;
+    justify-content: space-between;
+    width: 700px;
+    margin: 2% auto 2% auto;
 }
 
 .select-play2
 {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    width: 800px;
-    margin: 6% auto 0 auto;
+    justify-content: space-between;
+    width: 700px;
+    margin: 2% auto 2% auto;
+}
+
+.select-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    margin: 2% auto 2% auto;
 }
 
 .select-play .games .btn403{
@@ -24,6 +30,12 @@
 }
 
 .select-play2 .games .btn403{
+    display: flex;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.select-center .games .btn403{
     display: flex;
     margin: 0 auto;
     margin-top: 20px;
@@ -39,4 +51,20 @@
 
 .backButton:hover{
     filter: brightness(70%);
+}
+
+.wrapperPlay{
+border: 3px solid rgb(66, 73, 97);
+  background-color: #373a4e;
+  width: 1000px;
+  height: auto;
+  display: flex;
+  padding: 30px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 3%;
+  color: #cfd4df;
+  flex-direction: column;
+  border-radius: 20px;
 }

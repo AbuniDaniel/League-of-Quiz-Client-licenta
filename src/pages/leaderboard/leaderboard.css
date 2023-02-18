@@ -115,3 +115,23 @@
 		background-position: 0% 50%;
 	}
 }
+
+.textLeaderboard{
+	border: 3px solid rgb(66, 73, 97);
+	background-color: #373a4e;
+	width: 500px;
+	height: 60px;
+	display: flex;
+	padding: 30px;
+	justify-content: space-around;
+	align-items: center;
+	margin: 0 auto;
+	text-align: center;
+	margin-bottom: 30px;
+	color: #cfd4df;
+	border-radius: 20px;
+}
+
+.textLeaderboard h2{
+color: rgb(29, 170, 206);
+}

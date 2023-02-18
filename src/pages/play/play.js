@@ -13,12 +13,12 @@ import backButton from "./back-button.png"
 import { authContext } from "../../helpers/authContext"
 import { Result } from 'antd';
 import "antd/lib/result/style/index.css";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { notification } from 'antd';
 import "antd/lib/notification/style/index.css";
 
 function Play() {
-
+  const navigate = useNavigate();
   const { authState } = useContext(authContext);
   const [selectGame, setSelectGame] = useState("play");
 
@@ -57,6 +57,7 @@ function Play() {
   <>
     {selectGame === "play" &&
     <>
+    <div className="wrapperPlay">
     <div className="select-play">
       <div className="games">
       <img src={easy22poza} alt="easy22"></img>
@@ -65,6 +66,12 @@ function Play() {
       <div className="games">
       <img src={easy44poza} alt="easy44"></img>
       <button className="btn403" onClick={easy44}>Easy 4x4</button>
+      </div>
+    </div>
+    <div className="select-center">
+    <div className="games">
+      <img src={easy22poza} alt="easy22"></img>
+      <button className="btn403" onClick={()=> {navigate("/multiplayer")}}>Multiplayer</button>
       </div>
     </div>
     <div className="select-play2">
@@ -76,6 +83,7 @@ function Play() {
       <img src={hard44poza} alt="hard44"></img>
       <button className="btn403" onClick={hard44}>Hard 4x4</button>
       </div>
+    </div>
     </div>
     </>
     }

@@ -9,11 +9,28 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    margin-top: 3%;
+    margin-top: 25px;
     color: #cfd4df;
+    border-radius: 20px;
 }
 
 .containerHomeRoom{
+  border: 3px solid rgb(66, 73, 97);
+  background-color: #373a4e;
+  width: 900px;
+  height: auto;
+  display: flex;
+  padding: 30px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 25px;
+  color: #cfd4df;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.containerHomeRoomWaiting{
   border: 3px solid rgb(66, 73, 97);
   background-color: #373a4e;
   width: 600px;
@@ -23,8 +40,18 @@
   justify-content: space-around;
   align-items: center;
   margin: 0 auto;
-  margin-top: 3%;
+  margin-top: 25px;
   color: #cfd4df;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.containerHomeRoom2{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 600px;
+  margin-bottom: 40px;
 }
 
 .containerWaiting{
@@ -38,8 +65,9 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  margin-top: 3%;
+  margin-top: 25px;
   color: #cfd4df;
+  border-radius: 20px;
 }
 
 .homeButtonsRoom {
@@ -50,6 +78,15 @@
   padding: 9px 30px;
   font-size: 16px;
   transition: 0.3s;
+}
+
+.backButtonM{
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.backButtonM:hover{
+  filter: brightness(70%);
 }
 
 .homeButtonsRoom:hover {
@@ -96,6 +133,7 @@
 
   .titleRoomSettings{
     color: rgb(29, 170, 206);
+    margin-top: 0;
   }
 
   .titleWaitingRoom{
@@ -180,4 +218,15 @@
 .containerPlayersColumn .score{
   font-size: 2rem;
   margin: 0;
+}
+
+.rowRooms{
+  color:#cfd4df;
+  font-size: 1rem;
+  background-color: #225a8f;
+  cursor: pointer;
+}
+
+.rowRooms .ant-table-cell-row-hover{
+background-color: #3773ac !important;
 }

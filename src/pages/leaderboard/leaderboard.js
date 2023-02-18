@@ -187,13 +187,16 @@ function Leaderboard() {
     <>
       <Menu />
 
-      <div style={{ width: 1100, margin: "4% auto" }}>
+      <div style={{ width: 1100, margin: "3% auto" }}>
         {loadingTable ? (
           <div className="loading-locked-statistics">
             <Spin indicator={antIcon} />
           </div>
         ) : (
           <>
+          <div className="textLeaderboard">
+          <h2>Only players who have at least one game played in each mode are displayed on the leaderboard</h2>
+        </div>
             <Table
               columns={columns}
               dataSource={loadingTable ? [] : data_leaderboard}

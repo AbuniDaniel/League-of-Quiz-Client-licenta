@@ -735,7 +735,6 @@ function Profile() {
             <button className="changepfp" onClick={showPasswordModal}>
               Change Password
             </button>
-            <button className="changepfp">Change Email</button>
 
             <p className="date-created">Email: {userEmail}</p>
             <p className="date-created">
