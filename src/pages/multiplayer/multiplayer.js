@@ -64,6 +64,7 @@ function Multiplayer() {
   ]);
   const [key, setKey] = useState(0);
   useEffect(() => {
+    socket.emit("roomsAvailable");
     const fetchChampions = async () => {
       const response = await Axios.get(
         "https://daniel-licenta-api.herokuapp.com/champion-options"
