@@ -7,7 +7,6 @@ import hint_button from "./hint-button.png"
 import { authContext } from "../../helpers/authContext"
 import { Result } from 'antd';
 import "antd/lib/result/style/index.css";
-import { Link } from "react-router-dom";
 import { notification } from 'antd';
 import "antd/lib/notification/style/index.css";
 import { useNavigate} from "react-router-dom";
@@ -54,6 +53,12 @@ function Easy22(prop) {
           game_type: prop.selectGame,
           dificulty: dificulty,
         })
+        if(response.data.message){
+          navigate("/")
+          notification[response.data.type]({
+            message: response.data.message,
+          });
+        }
           setImgPath(response.data.img);
           setGameId(response.data.gameId);
           setSignature(response.data.signature);
