@@ -39,7 +39,7 @@ function ResetPass() {
     const verifyEmailUrl = async () => {
       let forgotToken = searchParams.get("token");
       const response = await Axios.get(
-        `http://localhost:3001/users/${param.id}/reset-pass?token=${forgotToken}`
+        `https://daniel-licenta-api.herokuapp.com/users/${param.id}/reset-pass?token=${forgotToken}`
       );
       setUsername("Username: " + response.data.username)
 
@@ -52,7 +52,7 @@ function ResetPass() {
   }, []);
 
   const resetPassF = async (values, actions) => {
-    const response = await Axios.post("http://localhost:3001/reset-password", {
+    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/reset-password", {
         id: param.id,
         token: searchParams.get("token"),
         password: values.password,

@@ -85,7 +85,7 @@ useEffect(() => {
 }, []);
 
 const fetchHomeStats = async () => {
-  const response = await Axios.get("http://localhost:3001/home-stats");
+  const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/home-stats");
   setAccounts(response.data.users);
   setHistory(response.data.history);
   setCorrectHistory(response.data.correct_history);

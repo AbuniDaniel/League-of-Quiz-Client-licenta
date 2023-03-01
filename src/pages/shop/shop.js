@@ -68,18 +68,18 @@ function Shop() {
   }, []);
 
   const fetchShopPfps = async () => {
-    const response = await Axios.get("http://localhost:3001/shop-pfps");
+    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/shop-pfps");
     setPfps(response.data);
   };
 
   const fetchShopBg = async () => {
-    const response = await Axios.get("http://localhost:3001/shop-bg");
+    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/shop-bg");
     setBgs(response.data);
   };
 
   const fetchUserPfps = async () => {
     const response = await Axios.post(
-      "http://localhost:3001/user-pfps",
+      "https://daniel-licenta-api.herokuapp.com/user-pfps",
       {},
       {
         headers: {
@@ -94,7 +94,7 @@ function Shop() {
 
   const fetchUserBg = async () => {
     const response = await Axios.post(
-      "http://localhost:3001/user-bg",
+      "https://daniel-licenta-api.herokuapp.com/user-bg",
       {},
       {
         headers: {
@@ -111,7 +111,7 @@ function Shop() {
     setIsBuyButtonDisabledBg(true)
     if(item_type === "hintPoints"){
       const response = await Axios.post(
-        "http://localhost:3001/buy-item",
+        "https://daniel-licenta-api.herokuapp.com/buy-item",
         {
           item_type: item_type,
           item_name: item_name,
@@ -138,7 +138,7 @@ function Shop() {
     }
     else{
       const response = await Axios.post(
-        "http://localhost:3001/buy-item",
+        "https://daniel-licenta-api.herokuapp.com/buy-item",
         {
           item_type: item_type,
           item_name: item_name,
