@@ -9,6 +9,7 @@ import easy22poza from "./easy22.webp"
 import easy44poza from "./easy44.webp"
 import hard22poza from "./hard22.webp"
 import hard44poza from "./hard44.webp"
+import multiplayer from "./1v1.webp"
 import backButton from "./back-button.png"
 import { authContext } from "../../helpers/authContext"
 import { Result } from 'antd';
@@ -70,7 +71,9 @@ function Play() {
     </div>
     <div className="select-center">
     <div className="games">
-      <img src={easy22poza} alt="easy22"></img>
+      <div className='animated-border'>
+        <img className="multiplayerImage" src={multiplayer} alt="easy22"></img>
+      </div>
       <button className="btn403" onClick={()=> {navigate("/multiplayer")}}>Multiplayer</button>
       </div>
     </div>

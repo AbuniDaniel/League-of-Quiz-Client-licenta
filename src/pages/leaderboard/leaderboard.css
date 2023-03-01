@@ -7,6 +7,10 @@
 	cursor: pointer;
 }
 
+.gradient1 .ant-table-cell-row-hover{
+	background-color: #23a6d5 !important;
+}
+
 .gradient2{
     color:#cfd4df;
     font-size: 1rem;
@@ -14,6 +18,10 @@
 	background-size: 200% 200%;
 	animation: gradient1 6s ease infinite;
 	cursor: pointer;
+}
+
+.gradient2 .ant-table-cell-row-hover{
+	background-color: #8e44ad !important;
 }
 
 .gradient3{
@@ -25,6 +33,10 @@
 	cursor: pointer;
 }
 
+.gradient3 .ant-table-cell-row-hover{
+	background-color: #06a393 !important;
+}
+  
 .gradient4{
     color:#cfd4df;
     font-size: 1rem;
@@ -32,6 +44,10 @@
 	background-size: 200% 200%;
 	animation: gradient1 6s ease infinite;
 	cursor: pointer;
+}
+
+.gradient4 .ant-table-cell-row-hover{
+	background-color: #574b90 !important;
 }
 
 .gradient5{
@@ -43,6 +59,9 @@
 	cursor: pointer;
 }
 
+.gradient4 .ant-table-cell-row-hover{
+	background-color: #273c75 !important;
+}
 
 .color1{
     color:#cfd4df;

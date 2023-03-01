@@ -13,8 +13,8 @@ import { useNavigate} from "react-router-dom";
 import FlipNumbers from 'react-flip-numbers';
 
 let champions;
-// "https://daniel-licenta-api.herokuapp.com"
-let url = "https://daniel-licenta-api.herokuapp.com";
+// "http://localhost:3001"
+let url = "http://localhost:3001";
 
 function Easy44(prop) {
   const navigate = useNavigate();

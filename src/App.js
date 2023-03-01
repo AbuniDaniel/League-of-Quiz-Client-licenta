@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const fetchUserAuth = async () => {
       const response = await Axios
-      .get("https://daniel-licenta-api.herokuapp.com/isUserAuth", {
+      .get("http://localhost:3001/isUserAuth", {
         headers: {
 			"x-access-token": localStorage.getItem("token"),
         },

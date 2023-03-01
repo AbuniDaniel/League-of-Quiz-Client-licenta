@@ -10,6 +10,7 @@ import CountUp from 'react-countup';
 import { useInView } from "react-intersection-observer";
 import dasd from "./44-443934_post-navigation-people-icon-grey.png";
 import dasdasfasd from "./question-mark.png";
+import { Link } from "react-router-dom";
 const textVariants = {
   visible: { opacity: 1},
   hidden: { opacity: 0 }
@@ -84,7 +85,7 @@ useEffect(() => {
 }, []);
 
 const fetchHomeStats = async () => {
-  const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/home-stats");
+  const response = await Axios.get("http://localhost:3001/home-stats");
   setAccounts(response.data.users);
   setHistory(response.data.history);
   setCorrectHistory(response.data.correct_history);
@@ -107,7 +108,7 @@ const fetchHomeStats = async () => {
         <motion.span
           key={index}
           initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { delay: index * 0.07 } }}
+          animate={{ y: 0, opacity: 1, transition: { delay: index * 0.04 } }}
         >
           <h1>{letter === " " ? "\u00a0" : letter}</h1>
         </motion.span>
@@ -125,7 +126,7 @@ const fetchHomeStats = async () => {
         <motion.span
           key={index}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { delay: index * 0.07 } }}
+          animate={{ opacity: 1, transition: { delay: index * 0.04 } }}
         >
           <h3>{letter === " " ? "\u00a0" : letter}</h3>
         </motion.span>
@@ -160,7 +161,7 @@ const fetchHomeStats = async () => {
           initial={"hidden"}
           animate={controls}
           variants={{
-            visible: { y: 0, opacity: 1, transition: { delay: index * 0.07 } },
+            visible: { y: 0, opacity: 1, transition: { delay: index * 0.04 } },
             hidden: { y: 20, opacity: 0 }
           }}
         >
@@ -219,7 +220,7 @@ const fetchHomeStats = async () => {
           initial={"hidden"}
           animate={controls5}
           variants={{
-            visible: { y: 0, opacity: 1, transition: { delay: index * 0.07 } },
+            visible: { y: 0, opacity: 1, transition: { delay: index * 0.04 } },
             hidden: { y: 20, opacity: 0 }
           }}
         >
@@ -236,7 +237,7 @@ const fetchHomeStats = async () => {
     variants={textVariants}
     style= {{display: 'flex', flexDirection: 'column'}}
 >
-<p>The first thing you need to do is create an account, you can create one here. Then use the PLAY button from the menu and select the desired difficulty.</p>
+<p>The first thing you need to do is create an account, you can create one <Link to="/register" className="nav-link" style={{ textDecoration: 'none' }}>here</Link>. Then use the <Link to="/play" className="nav-link" style={{ textDecoration: 'none' }}>PLAY</Link> button from the menu and select the desired difficulty.</p>
 </motion.div>
 <motion.div
     ref={ref7}
@@ -281,7 +282,7 @@ const fetchHomeStats = async () => {
     <CountUp 
     className={"countUp"}
     end={history} 
-    duration={0.005*history}
+    duration={1.3}
     enableScrollSpy={true}
     redraw={true}
     />
@@ -293,7 +294,7 @@ const fetchHomeStats = async () => {
     <CountUp 
     className={"countUp"}
     end={accounts} 
-    duration={0.1*accounts}
+    duration={0.01*accounts}
     enableScrollSpy={true}
     redraw={true}
     />
@@ -305,7 +306,7 @@ const fetchHomeStats = async () => {
     <CountUp 
     className={"countUp"}
     end={correctHistory} 
-    duration={0.005*correctHistory}
+    duration={1}
     enableScrollSpy={true}
     redraw={true}
     />

@@ -33,7 +33,7 @@ ChartJS.register(
   Legend,
   ArcElement
 );
-const ENDPOINT = "https://daniel-licenta-api.herokuapp.com";
+const ENDPOINT = "http://localhost:3001";
 const socket = io(ENDPOINT);
 let champions = [];
 
@@ -67,7 +67,7 @@ function Multiplayer() {
     socket.emit("roomsAvailable");
     const fetchChampions = async () => {
       const response = await Axios.get(
-        "https://daniel-licenta-api.herokuapp.com/champion-options"
+        "http://localhost:3001/champion-options"
       );
       champions = response.data;
     };

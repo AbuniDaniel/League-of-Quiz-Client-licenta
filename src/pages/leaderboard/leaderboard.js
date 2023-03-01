@@ -106,7 +106,7 @@ function Leaderboard() {
 
   
   const fetchLeaderboard = async () => {
-    const response = await Axios.get("https://daniel-licenta-api.herokuapp.com/leaderboard");
+    const response = await Axios.get("http://localhost:3001/leaderboard");
     
     data_leaderboard = [];
     let rankpoints;

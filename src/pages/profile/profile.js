@@ -158,7 +158,7 @@ function Profile() {
 
   let profile, pfp, userHistory
   const myProfile = async () => {
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/myprofile", {
+    const response = await Axios.post("http://localhost:3001/myprofile", {
       id: authState.id,
     });
     profile = response;
@@ -222,7 +222,7 @@ function Profile() {
 
   const fetchPfps = async () => {
     const response = await Axios.post(
-      "https://daniel-licenta-api.herokuapp.com/user-pfps",
+      "http://localhost:3001/user-pfps",
       {},
       {
         headers: {
@@ -236,7 +236,7 @@ function Profile() {
 
   const fetchUserBg = async () => {
     const response = await Axios.post(
-      "https://daniel-licenta-api.herokuapp.com/user-bg",
+      "http://localhost:3001/user-bg",
       {},
       {
         headers: {
@@ -338,7 +338,7 @@ function Profile() {
   //gata legat de x minutes ago
 
   const fetchUserHistory = async () => {
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/user-history" ,{
+    const response = await Axios.post("http://localhost:3001/user-history" ,{
       id: authState.id,
     });
     userHistory = response;
@@ -458,7 +458,7 @@ function Profile() {
   const changePfp = async (pfp_name) => {
     setConfirmLoading(true);
 
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-pfp", {
+    const response = await Axios.post("http://localhost:3001/change-pfp", {
       pfp_name: pfp_name,
     },
     {
@@ -480,7 +480,7 @@ function Profile() {
   const changeBg = async (bg_name) => {
     setConfirmLoading(true);
 
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-bg", {
+    const response = await Axios.post("http://localhost:3001/change-bg", {
       bg_name: bg_name,
     },
     {
@@ -505,7 +505,7 @@ function Profile() {
   const handleOk = async () => {
     setConfirmLoading(true);
 
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-pfp", {
+    const response = await Axios.post("http://localhost:3001/change-pfp", {
       pfp_name: pfpClicked,
     },
     {
@@ -543,7 +543,7 @@ function Profile() {
 
   const changeUsername = async (values, actions) => {
     setConfirmLoadingUsername(true);
-    const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-username", {
+    const response = await Axios.post("http://localhost:3001/change-username", {
         username: values.username,
     },
     {
@@ -596,7 +596,7 @@ function Profile() {
   
     const changePassword = async (values, actions) => {
       setConfirmLoadingPassword(true);
-      const response = await Axios.post("https://daniel-licenta-api.herokuapp.com/change-password", {
+      const response = await Axios.post("http://localhost:3001/change-password", {
           newPassword: values.newPassword,
           currentPassword: values.currentPassword
       },
