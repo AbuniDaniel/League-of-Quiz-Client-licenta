@@ -1,4 +1,4 @@
-# League of Quiz
+# League of Quiz (ReactJS)
 
 ## Technologies used
 HTML, CSS, JavaScript, ReactJS, Node+Express, MySQL
