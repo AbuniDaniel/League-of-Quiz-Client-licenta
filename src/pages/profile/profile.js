@@ -559,6 +559,7 @@ function Profile() {
     });
     if (response.data.type === "success") {
       setAuthState({ ...authState, username: values.username})
+      localStorage.setItem("token", response.data.token);
       setOpenUsername(false);
     }
     actions.resetForm();
