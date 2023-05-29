@@ -1,7 +1,7 @@
 .nav {
 	margin: 27px auto 0;
 	position: relative;
-	width: 650px;
+	width: 690px;
 	height: 50px;
 	background-color: #34495e;
 	border-radius: 8px;
@@ -10,7 +10,7 @@
 .navLogged {
 	margin: 27px auto 0;
 	position: relative;
-	width: 770px;
+	width: 810px;
 	height: 50px;
 	background-color: #34495e;
 	border-radius: 8px;
@@ -49,7 +49,7 @@
 	width: 160px;
 }
 .nav-link:nth-child(5) {
-	width: 120px;
+	width: 160px;
 }
 
 .nav-link:nth-child(6) {
@@ -77,14 +77,14 @@
 	background-color: #9b59b6;
 }
 .nav .start-register, .navLogged .start-register, .navLogged .start-myprofile, .nav-link:nth-child(5):hover~.animation {
-	width: 120px;
+	width: 160px;
 	left: 530px;
 	background-color: #e67e22;
 }
 
 .nav-link:nth-child(6):hover~.animation {
 	width: 120px;
-	left: 650px;
+	left: 690px;
 	background-color: #e6e322;
 }
 
