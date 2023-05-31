@@ -97,7 +97,7 @@ function Play() {
   <Result
     status="403"
     subTitle={<p className="msg403">Sorry, you are not authorized to access this page without being logged in</p>}
-    extra={<><Link to="/login" className="btn403">Am deja cont</Link><p className="msg403">sau</p><Link to="/register" className="btn403">Creează un cont</Link></>}
+    extra={<><Link to="/login" className="btn403">Already have an account?</Link><p className="msg403">sau</p><Link to="/register" className="btn403">Create an account</Link></>}
   />
             </>
     }
